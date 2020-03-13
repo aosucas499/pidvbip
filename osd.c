@@ -731,9 +731,8 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
                                             iso_text, strlen(iso_text), 40);  
     //graphics_update_displayed_resource(osd->img, x, y, width, 100);                                         
     free(iso_text);
-    free(iso_text2);
   }                                            
-  
+  free(iso_text2);
   osd_channellist_show_epg(osd, id);                                                                                      
   graphics_update_displayed_resource(osd->img, 0, 0, SCREENWIDTH,SCREENHEIGHT);                                        
 }
