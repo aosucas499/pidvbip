@@ -667,7 +667,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   uint32_t x = OSD_XMARGIN + 40;  
   uint32_t y = OSD_YMARGIN + 35;
   uint32_t width = 700;
-  uint32_t height = 50;  
+  uint32_t height = 38;  
   int id;
 
   int server;
@@ -787,7 +787,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
   int selected = 0;
   char str[60];
   uint32_t width = 700;
-  uint32_t height = 50;
+  uint32_t height = 38;
   uint32_t x = OSD_XMARGIN + 40;
   uint32_t y = OSD_YMARGIN + 35;
   uint32_t color;
