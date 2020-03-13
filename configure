@@ -28,7 +28,7 @@ OPTIONS=(
   "libavcodec:auto"
   "libavutil:auto"
   "avahi:auto"
-  "debug:no"
+  "debug:yes"
 )
 
 #
@@ -59,7 +59,7 @@ check_cc_header pthread\
 CFLAGS="$CFLAGS -I$VC_SDK_PATH/include"
 CFLAGS="$CFLAGS -I$VC_SDK_PATH/include/interface/vcos/pthreads"
 CFLAGS="$CFLAGS -I$VC_SDK_PATH/include/interface/vmcs_host/linux"
-LDFLAGS="$LDFLAGS -L$VC_SDK_PATH/lib -lbcm_host -lvcos -lvchiq_arm"
+LDFLAGS="$LDFLAGS -L$VC_SDK_PATH/lib -lbcm_host -lvcos -lvchiq_arm -lvchostif"
 
 check_cc_snippet "fpu" "" "-mfloat-abi=hard -mfpu=vfp" && \
   CFLAGS="$CFLAGS -mfloat-abi=hard -mfpu=vfp"
