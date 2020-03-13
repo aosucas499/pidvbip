@@ -602,7 +602,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   struct event_t* event = event_copy(osd->event, server);
   struct event_t* nextEvent = event_copy(osd->nextEvent, server);
 
-  osd_draw_window(osd, 500 + OSD_XMARGIN + 40, OSD_YMARGIN, SCREENWIDTH, 400);
+  osd_draw_window(osd, 800 + OSD_XMARGIN + 40, OSD_YMARGIN, SCREENWIDTH - 800 - OSD_XMARGIN -40, SCREENHEIGHT - OSD_YMARGIN);
 
   if (event == NULL)
     return;
@@ -620,7 +620,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   }
   
   snprintf(str, sizeof(str),"%02d:%02d - %02d:%02d %s",start_time.tm_hour,start_time.tm_min,stop_time.tm_hour,stop_time.tm_min, iso_text);
-  (void)graphics_resource_render_text_ext(osd->img, 500 + OSD_XMARGIN + 50, OSD_YMARGIN + 20, 1000, 50,
+  (void)graphics_resource_render_text_ext(osd->img, 50 + OSD_XMARGIN + 500, OSD_YMARGIN + 20, 1000, 50,
                                      GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
                                      GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
                                      str, strlen(str), 40);
@@ -807,8 +807,8 @@ void osd_channellist_display_channels(struct osd_t* osd)
  */
 void osd_channellist_display(struct osd_t* osd)
 {   
-  uint32_t width = 450;
-  uint32_t height = 700 - 2 * OSD_YMARGIN;
+  uint32_t width = 740;
+  uint32_t height = 720 - 2 * OSD_YMARGIN;
   
   pthread_mutex_lock(&osd->osd_mutex);
   osd_draw_window(osd, OSD_XMARGIN, OSD_YMARGIN, width, height);
