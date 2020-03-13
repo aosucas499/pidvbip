@@ -602,7 +602,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   struct event_t* event = event_copy(osd->event, server);
   struct event_t* nextEvent = event_copy(osd->nextEvent, server);
 
-  osd_draw_window(osd, 800 + OSD_XMARGIN + 40, OSD_YMARGIN, SCREENWIDTH - 800 - OSD_XMARGIN -40, SCREENHEIGHT - OSD_YMARGIN);
+  osd_draw_window(osd, 800 + OSD_XMARGIN + 40, OSD_YMARGIN, SCREENWIDTH - 800 - OSD_XMARGIN - 40, SCREENHEIGHT - 2 * OSD_YMARGIN);
 
   if (event == NULL)
     return;
@@ -620,7 +620,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   }
   
   snprintf(str, sizeof(str),"%02d:%02d - %02d:%02d %s",start_time.tm_hour,start_time.tm_min,stop_time.tm_hour,stop_time.tm_min, iso_text);
-  (void)graphics_resource_render_text_ext(osd->img, 50 + OSD_XMARGIN + 500, OSD_YMARGIN + 20, 1000, 50,
+  (void)graphics_resource_render_text_ext(osd->img, 50 + OSD_XMARGIN + 800, OSD_YMARGIN + 20, SCREENWIDTH - 800 - OSD_XMARGIN - 40, 50,
                                      GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
                                      GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
                                      str, strlen(str), 40);
@@ -630,7 +630,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   if (event->description) {
     char* iso_text = malloc(strlen(event->description)+1);
     utf8decode(event->description,iso_text);
-    render_paragraph(osd->img,iso_text,30,500 + OSD_XMARGIN + 50,OSD_YMARGIN + 70, SCREENWIDTH - 600);
+    render_paragraph(osd->img,iso_text,30,800 + OSD_XMARGIN + 50,OSD_YMARGIN + 70, SCREENWIDTH - 800 - OSD_XMARGIN - 40);
     free(iso_text);
   }
 
@@ -646,7 +646,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   }
   
   snprintf(str, sizeof(str),"%02d:%02d - %02d:%02d %s",start_time.tm_hour,start_time.tm_min,stop_time.tm_hour,stop_time.tm_min, iso_text);
-  (void)graphics_resource_render_text_ext(osd->img, 500 + OSD_XMARGIN + 50, OSD_YMARGIN + 300, 1000, 50,
+  (void)graphics_resource_render_text_ext(osd->img, 800 + OSD_XMARGIN + 50, OSD_YMARGIN + 300, SCREENWIDTH - 800 - OSD_XMARGIN - 40, 50,
                                      GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
                                      GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
                                      str, strlen(str), 40);
@@ -669,10 +669,33 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   uint32_t width = 700;
   uint32_t height = 50;  
   int id;
+
+  int server;
+  char* iso_text2 = NULL; 
+  struct tm start_time;
+  struct tm stop_time;
+	
+  channels_geteventid(id, &osd->event, &server);
+  channels_getnexteventid(id, &osd->nextEvent, &server);
+
+  struct event_t* event = event_copy(osd->event, server);
+  struct event_t* nextEvent = event_copy(osd->nextEvent, server);
+
+  /* Start/stop time - current event */
+  localtime_r((time_t*)&event->start, &start_time);
+  localtime_r((time_t*)&event->stop, &stop_time);
+  if (event->title) {
+    iso_text2 = malloc(strlen(event->title)+1);
+    utf8decode(event->title, iso_text2);
+  }
+  else {
+    iso_text2 = malloc(1);
+    iso_text2 = "";
+  }
   
   y += osd->channellist_selected_pos * 50;  // old selected position
   id = osd->channellist_prev_selected_channel;
-  snprintf(str, sizeof(str), "%d %s", channels_getlcn(id), channels_getname(id)); 
+  snprintf(str, sizeof(str), "%d %s - %s", channels_getlcn(id), channels_getname(id), iso_text2); 
   iso_text = malloc(strlen(str) + 1);
   utf8decode(str, iso_text);        
   (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
@@ -685,7 +708,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     osd->channellist_selected_pos++;
     y += 50;
     id = osd->channellist_selected_channel;
-    snprintf(str, sizeof(str), "%d %s", channels_getlcn(id), channels_getname(id)); 
+    snprintf(str, sizeof(str), "%d %s - %s", channels_getlcn(id), channels_getname(id), iso_text2); 
     iso_text = malloc(strlen(str) + 1);
     utf8decode(str, iso_text);        
     (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
@@ -699,7 +722,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     osd->channellist_selected_pos--;
     y -= 50;
     id = osd->channellist_selected_channel;
-    snprintf(str, sizeof(str), "%d %s", channels_getlcn(id), channels_getname(id)); 
+    snprintf(str, sizeof(str), "%d %s - %s", channels_getlcn(id), channels_getname(id), iso_text2); 
     iso_text = malloc(strlen(str) + 1);
     utf8decode(str, iso_text);        
     (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
@@ -707,7 +730,8 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
                                             COLOR_SELECTED_BACKGROUND,    /* bg */
                                             iso_text, strlen(iso_text), 40);  
     //graphics_update_displayed_resource(osd->img, x, y, width, 100);                                         
-    free(iso_text);                                        
+    free(iso_text);
+    free(iso_text2);
   }                                            
   
   osd_channellist_show_epg(osd, id);                                                                                      
@@ -763,9 +787,6 @@ void osd_channellist_display_channels(struct osd_t* osd)
       struct event_t* event = event_copy(osd->event, server);
       struct event_t* nextEvent = event_copy(osd->nextEvent, server);
 
-      //if (event == NULL)
-      //return;
-
       /* Start/stop time - current event */
       localtime_r((time_t*)&event->start, &start_time);
       localtime_r((time_t*)&event->stop, &stop_time);
@@ -788,7 +809,8 @@ void osd_channellist_display_channels(struct osd_t* osd)
                                             
       //fprintf(stderr, "%d %s %d\n", id, str, selected);  
       y += 50;
-      free(iso_text);     
+      free(iso_text); 
+      free(iso_text2)
       id = channels_getnext(id);   
       if (id == first_channel) {
         if (selected) {
