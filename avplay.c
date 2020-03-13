@@ -62,7 +62,6 @@ static int map_vcodec(enum AVCodecID id)
   printf("Mapping video codec ID %d (%x)\n", id, id);
   switch (id) {
     case    AV_CODEC_ID_MPEG2VIDEO:
-    case    AV_CODEC_ID_MPEG2VIDEO_XVMC:
       fprintf(stderr,"vcodec=MPEG2\n");
       return OMX_VIDEO_CodingMPEG2;
     case    AV_CODEC_ID_H264:
