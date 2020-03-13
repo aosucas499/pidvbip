@@ -771,7 +771,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
       localtime_r((time_t*)&event->stop, &stop_time);
       if (event->title) {
         iso_text2 = malloc(strlen(event->title)+1);
-        utf8decode(event->title, iso_text);
+        utf8decode(event->title, iso_text2);
       }
       else {
         iso_text2 = malloc(1);
