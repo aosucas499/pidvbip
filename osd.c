@@ -54,12 +54,12 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #define COLOR_SELECTED_TEXT GRAPHICS_RGBA32(0x00,0xff,0xff,0xff)
 #define COLOR_BACKGROUND GRAPHICS_RGBA32(0,0,0,0x80)
 #define COLOR_SELECTED_BACKGROUND GRAPHICS_RGBA32(0xff,0,0,0x80)
-#define CHANNELLIST_NUM_CHANNELS 12
+#define CHANNELLIST_NUM_CHANNELS 20
 #define CHANNELLIST_UP 1
 #define CHANNELLIST_DOWN 2
 
 #define SCREENWIDTH 1280
-#define SCREENHEIGHT 800
+#define SCREENHEIGHT 720
 
 static void utf8decode(char* str, char* r)
 {
@@ -729,6 +729,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
   uint32_t color;
   uint32_t bg_color;
   char* iso_text = NULL; 
+  char* iso_text2 = NULL; 
   int first_channel;
   
   num_channels = channels_getcount();
@@ -751,8 +752,29 @@ void osd_channellist_display_channels(struct osd_t* osd)
         color = COLOR_TEXT;
         bg_color = COLOR_BACKGROUND;
       } 
-            
-      snprintf(str, sizeof(str), "%d %s", channels_getlcn(id), channels_getname(id)); 
+      
+      channels_geteventid(channel_id, &osd->event, &server);
+      channels_getnexteventid(channel_id, &osd->nextEvent, &server);
+
+      struct event_t* event = event_copy(osd->event, server);
+      struct event_t* nextEvent = event_copy(osd->nextEvent, server);
+
+      //if (event == NULL)
+      //return;
+
+      /* Start/stop time - current event */
+      localtime_r((time_t*)&event->start, &start_time);
+      localtime_r((time_t*)&event->stop, &stop_time);
+      if (event->title) {
+        iso_text2 = malloc(strlen(event->title)+1);
+        utf8decode(event->title, iso_text);
+      }
+      else {
+        iso_text2 = malloc(1);
+        iso_text2 = "";
+      }
+	    
+      snprintf(str, sizeof(str), "%d %s - %s", channels_getlcn(id), channels_getname(id), iso_text2); 
       iso_text = malloc(strlen(str) + 1);
       utf8decode(str, iso_text);        
       (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
