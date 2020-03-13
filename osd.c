@@ -810,7 +810,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
       //fprintf(stderr, "%d %s %d\n", id, str, selected);  
       y += 50;
       free(iso_text); 
-      free(iso_text2)
+      free(iso_text2);
       id = channels_getnext(id);   
       if (id == first_channel) {
         if (selected) {
