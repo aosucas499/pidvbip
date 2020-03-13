@@ -729,8 +729,12 @@ void osd_channellist_display_channels(struct osd_t* osd)
   uint32_t color;
   uint32_t bg_color;
   char* iso_text = NULL; 
-  char* iso_text2 = NULL; 
   int first_channel;
+
+  int server;
+  char* iso_text2 = NULL; 
+  struct tm start_time;
+  struct tm stop_time;
   
   num_channels = channels_getcount();
   first_channel = channels_getfirst();
@@ -753,8 +757,8 @@ void osd_channellist_display_channels(struct osd_t* osd)
         bg_color = COLOR_BACKGROUND;
       } 
       
-      channels_geteventid(channel_id, &osd->event, &server);
-      channels_getnexteventid(channel_id, &osd->nextEvent, &server);
+      channels_geteventid(id, &osd->event, &server);
+      channels_getnexteventid(id, &osd->nextEvent, &server);
 
       struct event_t* event = event_copy(osd->event, server);
       struct event_t* nextEvent = event_copy(osd->nextEvent, server);
