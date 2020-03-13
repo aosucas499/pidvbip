@@ -49,7 +49,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #define CHANNELLIST_MIDDLE 0
 #define CHANNELLIST_TOP 1
 #define CHANNELLIST_BOTTOM 2
-#define CHANNELLIST_TEXTSIZE 40
+#define CHANNELLIST_TEXTSIZE 26
 #define COLOR_TEXT GRAPHICS_RGBA32(0xff,0xff,0xff,0xff)
 #define COLOR_SELECTED_TEXT GRAPHICS_RGBA32(0x00,0xff,0xff,0xff)
 #define COLOR_BACKGROUND GRAPHICS_RGBA32(0,0,0,0x80)
@@ -623,7 +623,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   (void)graphics_resource_render_text_ext(osd->img, 50 + OSD_XMARGIN + 800, OSD_YMARGIN + 20, SCREENWIDTH - 800 - OSD_XMARGIN - 40, 50,
                                      GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
                                      GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
-                                     str, strlen(str), 40);
+                                     str, strlen(str), 26);
   free(iso_text);
   
 
@@ -649,7 +649,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   (void)graphics_resource_render_text_ext(osd->img, 800 + OSD_XMARGIN + 50, OSD_YMARGIN + 300, SCREENWIDTH - 800 - OSD_XMARGIN - 40, 50,
                                      GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
                                      GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
-                                     str, strlen(str), 40);
+                                     str, strlen(str), 26);
   free(iso_text);
   
 
@@ -702,7 +702,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
                                           COLOR_TEXT,       /* fg */
                                           COLOR_BACKGROUND, /* bg */
-                                          iso_text, strlen(iso_text), 40);
+                                          iso_text, strlen(iso_text), 26);
   free(iso_text);
   free(iso_text2);
   
@@ -735,7 +735,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
                                             COLOR_SELECTED_TEXT, /* fg */
                                             COLOR_SELECTED_BACKGROUND,    /* bg */
-                                            iso_text, strlen(iso_text), 40);
+                                            iso_text, strlen(iso_text), 26);
     //graphics_update_displayed_resource(osd->img, x, y - 50, width, 100);                                        
     free(iso_text);
     free(iso_text2);
@@ -769,7 +769,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
                                             COLOR_SELECTED_TEXT, /* fg */
                                             COLOR_SELECTED_BACKGROUND,    /* bg */
-                                            iso_text, strlen(iso_text), 40);  
+                                            iso_text, strlen(iso_text), 26);  
     //graphics_update_displayed_resource(osd->img, x, y, width, 100);                                         
     free(iso_text);
     free(iso_text2);
@@ -845,7 +845,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
       (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
                                             color,         /* fg */
                                             bg_color,      /* bg */
-                                            iso_text, strlen(iso_text), 40);
+                                            iso_text, strlen(iso_text), 26);
                                             
       //fprintf(stderr, "%d %s %d\n", id, str, selected);  
       y += 50;
