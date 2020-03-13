@@ -675,7 +675,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   struct tm start_time;
   struct tm stop_time;
   
-  y += osd->channellist_selected_pos * 50;  // old selected position
+  y += osd->channellist_selected_pos * 38;  // old selected position
   id = osd->channellist_prev_selected_channel;
 	
   channels_geteventid(id, &osd->event, &server);
@@ -708,7 +708,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   
   if (direction == CHANNELLIST_DOWN) {
     osd->channellist_selected_pos++;
-    y += 50;
+    y += 38;
     id = osd->channellist_selected_channel;
 	  
     channels_geteventid(id, &osd->event, &server);
@@ -742,7 +742,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   }
   else {
     osd->channellist_selected_pos--;
-    y -= 50;
+    y -= 38;
     id = osd->channellist_selected_channel;
 	  
     channels_geteventid(id, &osd->event, &server);
@@ -848,7 +848,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
                                             iso_text, strlen(iso_text), 30);
                                             
       //fprintf(stderr, "%d %s %d\n", id, str, selected);  
-      y += 50;
+      y += 38;
       free(iso_text); 
       free(iso_text2);
       id = channels_getnext(id);   
