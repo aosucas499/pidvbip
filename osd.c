@@ -620,7 +620,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   }
   
   snprintf(str, sizeof(str),"%s", iso_text);
-  (void)graphics_resource_render_text_ext(osd->img, 10 + OSD_XMARGIN + 800, OSD_YMARGIN + 20, SCREENWIDTH - 800 - OSD_XMARGIN, 50,
+  (void)graphics_resource_render_text_ext(osd->img, 10 + OSD_XMARGIN + 800, OSD_YMARGIN + 20, SCREENWIDTH - 800 - 2 * OSD_XMARGIN, 50,
                                      GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
                                      GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
                                      str, strlen(str), 30);
@@ -630,7 +630,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   if (event->description) {
     char* iso_text = malloc(strlen(event->description)+1);
     utf8decode(event->description,iso_text);
-    render_paragraph(osd->img,iso_text,26,800 + OSD_XMARGIN + 10,OSD_YMARGIN + 70, SCREENWIDTH - 800 - OSD_XMARGIN);
+    render_paragraph(osd->img,iso_text,26,800 + OSD_XMARGIN + 10,OSD_YMARGIN + 70, SCREENWIDTH - 800 - 2 * OSD_XMARGIN);
     free(iso_text);
   }
 
@@ -667,8 +667,8 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
 {
   char str[60];
   char* iso_text;
-  uint32_t x = OSD_XMARGIN + 40;  
-  uint32_t y = OSD_YMARGIN + 35;
+  uint32_t x = OSD_XMARGIN + 20;  
+  uint32_t y = OSD_YMARGIN + 20;
   uint32_t width = 700;
   uint32_t height = 38;  
   int id;
@@ -791,8 +791,8 @@ void osd_channellist_display_channels(struct osd_t* osd)
   char str[60];
   uint32_t width = 700;
   uint32_t height = 38;
-  uint32_t x = OSD_XMARGIN + 40;
-  uint32_t y = OSD_YMARGIN + 35;
+  uint32_t x = OSD_XMARGIN + 20;
+  uint32_t y = OSD_YMARGIN + 20;
   uint32_t color;
   uint32_t bg_color;
   char* iso_text = NULL; 
