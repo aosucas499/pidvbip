@@ -597,12 +597,12 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   char* iso_text;
   
   channels_geteventid(channel_id, &osd->event, &server);
-  channels_getnexteventid(channel_id, &osd->nextEvent, &server);
+  //channels_getnexteventid(channel_id, &osd->nextEvent, &server);
 
   struct event_t* event = event_copy(osd->event, server);
-  struct event_t* nextEvent = event_copy(osd->nextEvent, server);
+  //struct event_t* nextEvent = event_copy(osd->nextEvent, server);
 
-  osd_draw_window(osd, 800 + OSD_XMARGIN + 40, OSD_YMARGIN, SCREENWIDTH - 800 - OSD_XMARGIN - 40, SCREENHEIGHT - 2 * OSD_YMARGIN);
+  osd_draw_window(osd, 800 + OSD_XMARGIN, OSD_YMARGIN, SCREENWIDTH - 800 - 2 * OSD_XMARGIN, SCREENHEIGHT - OSD_YMARGIN);
 
   if (event == NULL)
     return;
@@ -634,10 +634,13 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
     free(iso_text);
   }
 
+  event_free(event);
+  return;
+	
   if (nextEvent == NULL)
     return;
 
-  /* Start/stop time - next event */
+  // Start/stop time - next event
   localtime_r((time_t*)&nextEvent->start, &start_time);
   localtime_r((time_t*)&nextEvent->stop, &stop_time);
   if (nextEvent->title) {
