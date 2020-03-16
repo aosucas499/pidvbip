@@ -669,7 +669,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   char* iso_text;
   uint32_t x = OSD_XMARGIN + 20;  
   uint32_t y = OSD_YMARGIN + 20;
-  uint32_t width = 700;
+  uint32_t width = 740;
   uint32_t height = 38;  
   int id;
 
@@ -789,7 +789,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
   int id;
   int selected = 0;
   char str[60];
-  uint32_t width = 780;
+  uint32_t width = 740;
   uint32_t height = 38;
   uint32_t x = OSD_XMARGIN + 20;
   uint32_t y = OSD_YMARGIN + 20;
@@ -872,7 +872,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
  */
 void osd_channellist_display(struct osd_t* osd)
 {   
-  uint32_t width = 780;
+  uint32_t width = 740;
   uint32_t height = 720 - 2 * OSD_YMARGIN;
   
   pthread_mutex_lock(&osd->osd_mutex);
