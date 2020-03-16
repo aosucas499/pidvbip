@@ -602,7 +602,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   struct event_t* event = event_copy(osd->event, server);
   struct event_t* nextEvent = event_copy(osd->nextEvent, server);
 
-  osd_draw_window(osd, 800 + OSD_XMARGIN, OSD_YMARGIN, SCREENWIDTH - 800 - 2 * OSD_XMARGIN, SCREENHEIGHT - OSD_YMARGIN);
+  osd_draw_window(osd, 800 + OSD_XMARGIN, OSD_YMARGIN, SCREENWIDTH - 800 - OSD_XMARGIN, SCREENHEIGHT - 2 * OSD_YMARGIN);
 
   if (event == NULL)
     return;
@@ -619,8 +619,8 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
     iso_text = "";
   }
   
-  snprintf(str, sizeof(str),"%02d:%02d - %02d:%02d %s",start_time.tm_hour,start_time.tm_min,stop_time.tm_hour,stop_time.tm_min, iso_text);
-  (void)graphics_resource_render_text_ext(osd->img, 50 + OSD_XMARGIN + 800, OSD_YMARGIN + 20, SCREENWIDTH - 800 - OSD_XMARGIN - 40, 50,
+  snprintf(str, sizeof(str),"%s", iso_text);
+  (void)graphics_resource_render_text_ext(osd->img, 10 + OSD_XMARGIN + 800, OSD_YMARGIN + 20, SCREENWIDTH - 800 - OSD_XMARGIN, 50,
                                      GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
                                      GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
                                      str, strlen(str), 30);
@@ -630,7 +630,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   if (event->description) {
     char* iso_text = malloc(strlen(event->description)+1);
     utf8decode(event->description,iso_text);
-    render_paragraph(osd->img,iso_text,30,800 + OSD_XMARGIN + 50,OSD_YMARGIN + 70, SCREENWIDTH - 800 - OSD_XMARGIN - 40);
+    render_paragraph(osd->img,iso_text,26,800 + OSD_XMARGIN + 10,OSD_YMARGIN + 70, SCREENWIDTH - 800 - OSD_XMARGIN);
     free(iso_text);
   }
 
