@@ -76,12 +76,13 @@ void process_event_message(char* method, struct htsp_message_t* msg)
   uint32_t eventId;
   int do_insert = 0;
    
-  htsp_get_int64(msg,"stop",&event->stop);
+  uint64_t tmpstop;
+  htsp_get_int64(msg,"stop",&tmpstop);
    
-  fprintf(stderr,"dni: %ul \n %lu \n",event->stop,(unsigned long)time(NULL));
+  fprintf(stderr,"dni: %ul \n %lu \n",tmpstop,(unsigned long)time(NULL));
    
   if (event->stop > (unsigned long)time(NULL)){
-  fprintf(stderr,"dni inserted: %i \n",event->eventId);
+  //fprintf(stderr,"dni inserted: %i \n",event->eventId);
   
   htsp_get_uint(msg,"eventId",&eventId);
 
