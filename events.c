@@ -109,7 +109,7 @@ void process_event_message(char* method, struct htsp_message_t* msg)
   htsp_get_int64(msg,"start",&event->start);
   htsp_get_int64(msg,"stop",&event->stop);
   event->title = htsp_get_string(msg,"title");
-  event->description = htsp_get_string(msg,"description");
+  event->description = htsp_get_string(msg,"summary");
   htsp_get_uint(msg,"serieslinkId",&event->serieslinkId);
   event->serieslinkUri = htsp_get_string(msg,"serieslinkUri");
   htsp_get_uint(msg,"episodeId",&event->episodeId);
