@@ -122,7 +122,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       fprintf(stderr,"tagsstring: %s\n",htsp_get_string(msg,"tags"));
       if (htsp_get_list(msg,"tags",&tagslist,&tagslistlen) == 0)
       {
-        fprintf(stderr,"tagslen: %i\n",tagslen));
+        fprintf(stderr,"tagslen: %i\n",tagslen);
         unsigned char* buf = tagslist;
         int type = buf[0]; if (type > 6) { type = 0; }
         int namelength = buf[1];
