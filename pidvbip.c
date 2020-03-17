@@ -117,19 +117,14 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       if (htsp_get_uint(msg,"eventId",&eventid) > 0) { eventid = 0; }
       if (htsp_get_uint(msg,"nextEventId",&nexteventid) > 0) { nexteventid = 0; }
       channelName = htsp_get_string(msg,"channelName");
-      htsp_get_uint(msg,"tags",&tags);
-      fprintf(stderr,"tags: %i\n",tags);
-      fprintf(stderr,"tagsstring: %s\n",htsp_get_string(msg,"tags"));
       if (htsp_get_list(msg,"tags",&tagslist,&tagslistlen) == 0)
       {
         fprintf(stderr,"tagslen: %i\n",tagslistlen);
         unsigned char* buf = tagslist;
-        int type = buf[0]; if (type > 6) { type = 0; }
-        int namelength = buf[1];
-        int datalength = (buf[2] << 24) | (buf[3] << 16) | (buf[4] << 8) | buf[5];
-
-        buf += 6;
-      }
+        for (i=0;i<tagslistlen;i++) {
+          fprintf(stderr,"%c",buf[i])
+	}
+	fprintf(stderr,"\n")
 	    
       if (htsp_get_list(msg,"services",&list,&listlen) > 0)
       {
