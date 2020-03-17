@@ -111,6 +111,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
     char* channelName;
     unsigned char* list, tagslist;
     int listlen, tagslistlen;
+    int i;
 
     if (htsp_get_int(msg,"channelId",&channelId) == 0) { 
       if (htsp_get_int(msg,"channelNumber",&channelNumber) > 0) { channelNumber = -1; }
