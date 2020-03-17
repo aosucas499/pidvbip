@@ -82,6 +82,7 @@ void process_event_message(char* method, struct htsp_message_t* msg)
    
   if (event->stop > (unsigned long)time(NULL)){
   fprintf(stderr,"dni inserted: %i \n",event->eventId);
+  
   htsp_get_uint(msg,"eventId",&eventId);
 
   pthread_mutex_lock(&events_mutex);
@@ -149,6 +150,7 @@ void process_event_message(char* method, struct htsp_message_t* msg)
 #endif
   }
   pthread_mutex_unlock(&events_mutex);
+  }
 }
 
 void event_delete(uint32_t eventId, int server)
