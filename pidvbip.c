@@ -124,10 +124,16 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       {
         fprintf(stderr,"tagslen: %i\n",tagslistlen);
 	unsigned char* buflist = tagslist;
-        fprintf(stderr,"tagslen: %i\n",tagslistlen);
-        for (i=0;i<tagslistlen;i++) {
-          fprintf(stderr,"%s",buflist[i]);
-	}	      
+        //for (i=0;i<tagslistlen;i++) {
+          fprintf(stderr,"%c",buflist[0]);
+	  fprintf(stderr,"%c",buflist[1]);
+	  fprintf(stderr,"%c",buflist[2]);
+	  fprintf(stderr,"%c",buflist[3]);
+	  fprintf(stderr,"%c",buflist[4]);
+	  fprintf(stderr,"%c",buflist[5]);
+	  fprintf(stderr,"%c",buflist[6]);
+	  fprintf(stderr,"%c",buflist[7]);
+	//}	      
 	fprintf(stderr,"\n");
       }
 	      
