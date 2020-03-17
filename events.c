@@ -8,7 +8,7 @@
 #include "channels.h"
 #include "list.h"
 
-#define DEBUG_EVENTS
+//#define DEBUG_EVENTS
 
 /* Events are stored in an array of 512*1024 elements, using the lower
    19 bits of the eventId as the index to the array.  The array item
@@ -126,7 +126,7 @@ void process_event_message(char* method, struct htsp_message_t* msg)
   event->episodeUri = htsp_get_string(msg,"episodeUri");
   htsp_get_uint(msg,"nextEventId",&event->nextEventId);
 
-  htsp_dump_message(msg);
+  //htsp_dump_message(msg);
 
   event->server = msg->server;
 
