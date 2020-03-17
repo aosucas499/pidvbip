@@ -124,6 +124,10 @@ void process_event_message(char* method, struct htsp_message_t* msg)
 
   eventId = eventId * MAX_HTSP_SERVERS + msg->server;
 
+  fprintf(stderr,"dni: %ul \n %ul \n",event->stop,(unsigned long)time(NULL));
+   
+  if (event->stop > (unsigned long)time(NULL)){
+  fprintf(stderr,"dni inserted: %i \n",event->eventid);
   if (do_insert) {
     if (!events[eventId & EVENT_HASH_MASK]) {
       /* Create the list */
@@ -133,9 +137,7 @@ void process_event_message(char* method, struct htsp_message_t* msg)
     if (!list_empty(events[eventId & EVENT_HASH_MASK])) {
       fprintf(stderr,"INFO: Event hash clash\n");
     }
-    if (event->stop > (unsigned long)time(NULL)){
-        list_add(&event->list, events[eventId & EVENT_HASH_MASK]);
-    }
+    list_add(&event->list, events[eventId & EVENT_HASH_MASK]);
 
 #ifdef DEBUG_EVENTS
     struct event_t* event2 = event_get_nolock(eventId,msg->server);
@@ -143,6 +145,7 @@ void process_event_message(char* method, struct htsp_message_t* msg)
       fprintf(stderr,"ERROR: Inserted event %d but could not retrieve it.\n",eventId);
     }
 #endif
+  }
   }
   pthread_mutex_unlock(&events_mutex);
 }
