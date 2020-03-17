@@ -114,7 +114,7 @@ void process_event_message(char* method, struct htsp_message_t* msg)
   htsp_get_uint(msg,"eventId",&event->eventId);
   htsp_get_uint(msg,"channelId",&event->channelId);
   htsp_get_int64(msg,"start",&event->start);
-  //htsp_get_int64(msg,"stop",&event->stop);
+  htsp_get_int64(msg,"stop",&event->stop);
   event->title = htsp_get_string(msg,"title");
   event->description = htsp_get_string(msg,"description");
   htsp_get_uint(msg,"serieslinkId",&event->serieslinkId);
