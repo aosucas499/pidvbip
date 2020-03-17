@@ -107,7 +107,8 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
   } else if ((strcmp(method,"channelAdd")==0) || (strcmp(method,"channelUpdate")==0)) {
     // channelName, channelNumber, channelId
     int channelNumber,channelId,channelType;
-    uint32_t eventid,nexteventid,tags;
+    uint32_t eventid,nexteventid;
+    uint64_t tags;
     char* channelName;
     unsigned char* list, tagslist;
     int listlen, tagslistlen;
@@ -124,15 +125,16 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       {
         fprintf(stderr,"tagslen: %i\n",tagslistlen);
 	unsigned char* buflist = tagslist;
+	fprintf(stderr,"%i",(sizeof(buflist));
         //for (i=0;i<tagslistlen;i++) {
-          fprintf(stderr,"%c",buflist[0]);
-	  fprintf(stderr,"%c",buflist[1]);
-	  fprintf(stderr,"%c",buflist[2]);
-	  fprintf(stderr,"%c",buflist[3]);
-	  fprintf(stderr,"%c",buflist[4]);
-	  fprintf(stderr,"%c",buflist[5]);
-	  fprintf(stderr,"%c",buflist[6]);
-	  fprintf(stderr,"%c",buflist[7]);
+          fprintf(stderr,"%s",buflist[0]);
+	  fprintf(stderr,"%s",buflist[1]);
+	  fprintf(stderr,"%s",buflist[2]);
+	  fprintf(stderr,"%s",buflist[3]);
+	  fprintf(stderr,"%s",buflist[4]);
+	  fprintf(stderr,"%s",buflist[5]);
+	  fprintf(stderr,"%s",buflist[6]);
+	  fprintf(stderr,"%s",buflist[7]);
 	//}	      
 	fprintf(stderr,"\n");
       }
