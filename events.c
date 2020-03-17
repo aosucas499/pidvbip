@@ -133,7 +133,9 @@ void process_event_message(char* method, struct htsp_message_t* msg)
     if (!list_empty(events[eventId & EVENT_HASH_MASK])) {
       fprintf(stderr,"INFO: Event hash clash\n");
     }
-    //list_add(&event->list, events[eventId & EVENT_HASH_MASK]);
+    if (event->stop > (unsigned long)time(NULL)){
+        list_add(&event->list, events[eventId & EVENT_HASH_MASK]);
+    }
 
 #ifdef DEBUG_EVENTS
     struct event_t* event2 = event_get_nolock(eventId,msg->server);
