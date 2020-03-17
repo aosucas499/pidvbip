@@ -200,6 +200,8 @@ void gx_priv_destroy_native_window(GRAPHICS_RESOURCE_HANDLE_TABLE_T *res);
  *
  * @return VCOS_SUCCESS on success, or error code.
  */
+VCOS_STATUS_T gx_priv_font_init2(const char *font_dir);
+
 VCOS_STATUS_T gx_priv_font_init(const unsigned char *font, int fontsize);
 
 /**
@@ -259,8 +261,8 @@ VCOS_STATUS_T gx_priv_resource_fill(GRAPHICS_RESOURCE_HANDLE res,
  ***********************************************************/
 VCOS_STATUS_T gx_priv_render_text( GX_DISPLAY_T *disp,
                                    GRAPHICS_RESOURCE_HANDLE res,
-                                   uint32_t ,
-                                   uint32_t y,
+                                   int32_t x,
+                                   int32_t y,
                                    uint32_t width,
                                    uint32_t height,
                                    uint32_t fg_colour,

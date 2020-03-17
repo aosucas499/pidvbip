@@ -4,4 +4,3 @@ LIB=libvgfont.a
 CFLAGS+=-D_HAVE_TIMER_T
 
 include ../Makefile.include
-

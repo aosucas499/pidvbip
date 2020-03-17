@@ -387,7 +387,6 @@ fail_win:
    gx_priv_destroy_native_window(h);
 fail_create_native_win:
    vcos_free(h);
-   gx_priv_restore(&save);
    return status;
 }
 
@@ -475,8 +474,8 @@ int32_t graphics_resource_fill(GRAPHICS_RESOURCE_HANDLE res,
 
 /*****************************************************************************/
 int32_t graphics_resource_render_text_ext( GRAPHICS_RESOURCE_HANDLE res,
-                                           const uint32_t x,
-                                           const uint32_t y,
+                                           const int32_t x,
+                                           const int32_t y,
                                            const uint32_t width,
                                            const uint32_t height,
                                            const uint32_t fg_colour,
@@ -501,8 +500,8 @@ int32_t graphics_resource_render_text_ext( GRAPHICS_RESOURCE_HANDLE res,
 
 /*****************************************************************************/
 int32_t graphics_resource_render_text(  GRAPHICS_RESOURCE_HANDLE res,
-                                        const uint32_t x,
-                                        const uint32_t y,
+                                        const int32_t x,
+                                        const int32_t y,
                                         const uint32_t width, /* this can be GRAPHICS_RESOURCE_WIDTH for no clipping */
                                         const uint32_t height, /* this can be GRAPHICS_RESOURCE_HEIGHT for no clipping */
                                         const uint32_t fg_colour,
@@ -968,7 +967,7 @@ finish:
    return status;
 }
 
-/*****************************************************************************/
+
 VCOS_STATUS_T gx_graphics_init(const unsigned char *font, int fontsize)
 {
    GX_CLIENT_STATE_T save;
@@ -979,6 +978,24 @@ VCOS_STATUS_T gx_graphics_init(const unsigned char *font, int fontsize)
    rc = gx_priv_initialise();
    if (rc == VCOS_SUCCESS)
      rc = gx_priv_font_init(font,fontsize);
+
+   gx_priv_restore(&save);
+   
+   return rc;
+}
+
+
+/*****************************************************************************/
+VCOS_STATUS_T gx_graphics_init2(const char *font_dir)
+{
+   GX_CLIENT_STATE_T save;
+   VCOS_STATUS_T rc;
+   
+   gx_priv_save(&save, NULL);
+   
+   rc = gx_priv_initialise();
+   if (rc == VCOS_SUCCESS)
+      rc = gx_priv_font_init2(font_dir);
 
    gx_priv_restore(&save);
    
