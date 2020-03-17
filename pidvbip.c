@@ -125,7 +125,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       {
         fprintf(stderr,"tagslen: %i\n",tagslistlen);
 	unsigned char* buflist = tagslist;
-	fprintf(stderr,"%i",(sizeof(buflist));
+	fprintf(stderr,"%i",sizeof(buflist));
         //for (i=0;i<tagslistlen;i++) {
           fprintf(stderr,"%s",buflist[0]);
 	  fprintf(stderr,"%s",buflist[1]);
