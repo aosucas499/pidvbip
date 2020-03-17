@@ -136,7 +136,7 @@ void process_event_message(char* method, struct htsp_message_t* msg)
     list_add(&event->list, events[eventId & EVENT_HASH_MASK]);
 
 #ifdef DEBUG_EVENTS
-    struct event_t* event2 = event_get_nolock(eventId);
+    struct event_t* event2 = event_get_nolock(eventId,server);
     if (event2 == NULL) {
       fprintf(stderr,"ERROR: Inserted event %d but could not retrieve it.\n",eventId);
     }
