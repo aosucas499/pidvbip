@@ -156,10 +156,10 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
 
       if (strcmp(method,"channelAdd")==0) {
         channels_add(msg->server, channelNumber,channelId,channelName,channelType,eventid,nexteventid);
-        //fprintf(stderr,"channelAdd - id=%d,lcn=%d,name=%s,current_event=%d,next_event=%d\n",channelId,channelNumber,channelName,eventid,nexteventid);
+        fprintf(stderr,"channelAdd - id=%d,lcn=%d,name=%s,current_event=%d,next_event=%d\n",channelId,channelNumber,channelName,eventid,nexteventid);
       } else {
         channels_update(msg->server, channelNumber,channelId,channelName,channelType,eventid,nexteventid);
-        //fprintf(stderr,"channelUpdate - id=%d,current_event=%d,next_event=%d\n",channelId,eventid,nexteventid);
+        fprintf(stderr,"channelUpdate - id=%d,current_event=%d,next_event=%d\n",channelId,eventid,nexteventid);
       }
     }
   } else if (strcmp(method,"queueStatus")== 0) {
