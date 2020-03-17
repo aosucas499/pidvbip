@@ -76,12 +76,12 @@ void process_event_message(char* method, struct htsp_message_t* msg)
   uint32_t eventId;
   int do_insert = 0;
    
-  uint64_t tmpstop;
-  htsp_get_int64(msg,"stop",&tmpstop);
+  //uint64_t tmpstop;
+  //htsp_get_int64(msg,"stop",&tmpstop);
    
-  fprintf(stderr,"dni: %ul \n %ul \n",tmpstop,(unsigned long)time(NULL));
+  //fprintf(stderr,"dni: %ul \n %ul \n",tmpstop,(unsigned long)time(NULL));
    
-  if (tmpstop > (unsigned long)time(NULL)){
+  //if (tmpstop > (unsigned long)time(NULL)){
   //fprintf(stderr,"dni inserted: %i \n",event->eventId);
   
   htsp_get_uint(msg,"eventId",&eventId);
@@ -151,7 +151,7 @@ void process_event_message(char* method, struct htsp_message_t* msg)
 #endif
   }
   pthread_mutex_unlock(&events_mutex);
-  }
+  //}
 }
 
 void event_delete(uint32_t eventId, int server)
