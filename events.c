@@ -163,7 +163,6 @@ void event_delete(uint32_t eventId, int server)
   }
   pthread_mutex_unlock(&events_mutex);
 }
-}
 
 struct event_t* event_copy(uint32_t eventId, int server)
 {
