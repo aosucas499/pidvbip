@@ -109,8 +109,8 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
     int channelNumber,channelId,channelType;
     uint32_t eventid,nexteventid,tags;
     char* channelName;
-    unsigned char* list;
-    int listlen;
+    unsigned char* list, tagslist;
+    int listlen, tagslistlen;
 
     if (htsp_get_int(msg,"channelId",&channelId) == 0) { 
       if (htsp_get_int(msg,"channelNumber",&channelNumber) > 0) { channelNumber = -1; }
@@ -119,6 +119,17 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       channelName = htsp_get_string(msg,"channelName");
       htsp_get_uint(msg,"tags",&tags);
       fprintf(stderr,"tags: %i\n",tags);
+      fprintf(stderr,"tagsstring: %s\n",htsp_get_string(msg,"tags"));
+      if (htsp_get_list(msg,"tags",&tagslist,&tagslistlen) == 0)
+      {
+        fprintf(stderr,"tagslen: %i\n",tagslen));
+        unsigned char* buf = tagslist;
+        int type = buf[0]; if (type > 6) { type = 0; }
+        int namelength = buf[1];
+        int datalength = (buf[2] << 24) | (buf[3] << 16) | (buf[4] << 8) | buf[5];
+
+        buf += 6;
+      }
 	    
       if (htsp_get_list(msg,"services",&list,&listlen) > 0)
       {
