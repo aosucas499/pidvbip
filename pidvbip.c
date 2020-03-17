@@ -126,7 +126,8 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
           fprintf(stderr,"%c",buf[i]);
 	}
 	fprintf(stderr,"\n");
-	    
+      }
+	      
       if (htsp_get_list(msg,"services",&list,&listlen) > 0)
       {
         channelType = CTYPE_NONE;
