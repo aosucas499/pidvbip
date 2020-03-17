@@ -117,7 +117,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       if (htsp_get_uint(msg,"eventId",&eventid) > 0) { eventid = 0; }
       if (htsp_get_uint(msg,"nextEventId",&nexteventid) > 0) { nexteventid = 0; }
       channelName = htsp_get_string(msg,"channelName");
-      if (htsp_get_list(msg,"tags",&tags) > 0) { tags = 0; }
+      if (htsp_get_uint(msg,"tags",&tags) > 0) { tags = 0; }
       fprintf(stderr,"tags: %i\n",tags);
 	    
       if (htsp_get_list(msg,"services",&list,&listlen) > 0)
