@@ -79,9 +79,9 @@ void process_event_message(char* method, struct htsp_message_t* msg)
   uint64_t tmpstop;
   htsp_get_int64(msg,"stop",&tmpstop);
    
-  fprintf(stderr,"dni: %ul \n %lu \n",tmpstop,(unsigned long)time(NULL));
+  fprintf(stderr,"dni: %ul \n %ul \n",tmpstop,(unsigned long)time(NULL));
    
-  if (event->stop > (unsigned long)time(NULL)){
+  if (tmpstop > (unsigned long)time(NULL)){
   //fprintf(stderr,"dni inserted: %i \n",event->eventId);
   
   htsp_get_uint(msg,"eventId",&eventId);
