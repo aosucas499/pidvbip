@@ -75,7 +75,13 @@ void process_event_message(char* method, struct htsp_message_t* msg)
   struct event_t* event;
   uint32_t eventId;
   int do_insert = 0;
-
+   
+  htsp_get_int64(msg,"stop",&event->stop);
+   
+  fprintf(stderr,"dni: %ul \n %lu \n",event->stop,(unsigned long)time(NULL));
+   
+  if (event->stop > (unsigned long)time(NULL)){
+  fprintf(stderr,"dni inserted: %i \n",event->eventId);
   htsp_get_uint(msg,"eventId",&eventId);
 
   pthread_mutex_lock(&events_mutex);
@@ -107,7 +113,7 @@ void process_event_message(char* method, struct htsp_message_t* msg)
   htsp_get_uint(msg,"eventId",&event->eventId);
   htsp_get_uint(msg,"channelId",&event->channelId);
   htsp_get_int64(msg,"start",&event->start);
-  htsp_get_int64(msg,"stop",&event->stop);
+  //htsp_get_int64(msg,"stop",&event->stop);
   event->title = htsp_get_string(msg,"title");
   event->description = htsp_get_string(msg,"description");
   htsp_get_uint(msg,"serieslinkId",&event->serieslinkId);
@@ -124,10 +130,6 @@ void process_event_message(char* method, struct htsp_message_t* msg)
 
   eventId = eventId * MAX_HTSP_SERVERS + msg->server;
 
-  fprintf(stderr,"dni: %ul \n %ul \n",event->stop,(unsigned long)time(NULL));
-   
-  if (event->stop > (unsigned long)time(NULL)){
-  fprintf(stderr,"dni inserted: %i \n",event->eventId);
   if (do_insert) {
     if (!events[eventId & EVENT_HASH_MASK]) {
       /* Create the list */
@@ -146,7 +148,6 @@ void process_event_message(char* method, struct htsp_message_t* msg)
     }
 #endif
   }
-  }
   pthread_mutex_unlock(&events_mutex);
 }
 
@@ -159,6 +160,7 @@ void event_delete(uint32_t eventId, int server)
     event_free(event);
   }
   pthread_mutex_unlock(&events_mutex);
+}
 }
 
 struct event_t* event_copy(uint32_t eventId, int server)
