@@ -127,7 +127,7 @@ void process_event_message(char* method, struct htsp_message_t* msg)
   fprintf(stderr,"dni: %ul \n %ul \n",event->stop,(unsigned long)time(NULL));
    
   if (event->stop > (unsigned long)time(NULL)){
-  fprintf(stderr,"dni inserted: %i \n",event->eventid);
+  fprintf(stderr,"dni inserted: %i \n",event->eventId);
   if (do_insert) {
     if (!events[eventId & EVENT_HASH_MASK]) {
       /* Create the list */
