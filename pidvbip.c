@@ -122,9 +122,9 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
         fprintf(stderr,"tagslen: %i\n",tagslistlen);
         unsigned char* buf = tagslist;
         for (i=0;i<tagslistlen;i++) {
-          fprintf(stderr,"%c",buf[i])
+          fprintf(stderr,"%c",buf[i]);
 	}
-	fprintf(stderr,"\n")
+	fprintf(stderr,"\n");
 	    
       if (htsp_get_list(msg,"services",&list,&listlen) > 0)
       {
