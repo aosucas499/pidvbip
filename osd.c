@@ -823,7 +823,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
     id = osd->channellist_start_channel;
     
     for (i = 0; i < num_display; i++) {
-	    fprintf(stderr,"osd_channellist_display_channels %i\n"),i;
+	    fprintf(stderr,"osd_channellist_display_channels %i\n",i);
       if (id == osd->channellist_selected_channel) {
         selected = 1;
         osd->channellist_selected_pos = i;
@@ -835,28 +835,39 @@ void osd_channellist_display_channels(struct osd_t* osd)
         color = COLOR_TEXT;
         bg_color = COLOR_BACKGROUND;
       } 
-
+fprintf(stderr,"osd_channellist_display_channels test1\n");
       channels_geteventid(id, &osd->event, &server);
+fprintf(stderr,"osd_channellist_display_channels test2\n");
       channels_getnexteventid(id, &osd->nextEvent, &server);
+fprintf(stderr,"osd_channellist_display_channels test3\n");
 
       struct event_t* event = event_copy(osd->event, server);
+fprintf(stderr,"osd_channellist_display_channels test4\n");
       struct event_t* nextEvent = event_copy(osd->nextEvent, server);
-
+fprintf(stderr,"osd_channellist_display_channels test5\n");
         /* Start/stop time - current event */
         localtime_r((time_t*)&event->start, &start_time);
+fprintf(stderr,"osd_channellist_display_channels test6\n");
         localtime_r((time_t*)&event->stop, &stop_time);
+fprintf(stderr,"osd_channellist_display_channels test7\n");
         if (event->title) {
+fprintf(stderr,"osd_channellist_display_channels test8\n");
           iso_text2 = malloc(strlen(event->title)+1);
+fprintf(stderr,"osd_channellist_display_channels test9\n");
           utf8decode(event->title, iso_text2);
+fprintf(stderr,"osd_channellist_display_channels test10\n");
         }
         else {
           iso_text2 = malloc(1);
           iso_text2 = "";
         }
-	        
+fprintf(stderr,"osd_channellist_display_channels test11\n");
       snprintf(str, sizeof(str), "%d %s - %s", channels_getlcn(id), channels_getname(id), iso_text2); 
+fprintf(stderr,"osd_channellist_display_channels test12\n");
       iso_text = malloc(strlen(str) + 1);
-      utf8decode(str, iso_text);        
+fprintf(stderr,"osd_channellist_display_channels test13\n");
+      utf8decode(str, iso_text);
+fprintf(stderr,"osd_channellist_display_channels test14\n");
       (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
                                             color,         /* fg */
                                             bg_color,      /* bg */
@@ -864,8 +875,11 @@ void osd_channellist_display_channels(struct osd_t* osd)
                                             
       //fprintf(stderr, "%d %s %d\n", id, str, selected);  
       y += 38;
+fprintf(stderr,"osd_channellist_display_channels test15\n");
       free(iso_text); 
+fprintf(stderr,"osd_channellist_display_channels test16\n");
       free(iso_text2);
+fprintf(stderr,"osd_channellist_display_channels test17\n");
       id = channels_getnext(id);   
       if (id == first_channel) {
         if (selected) {
