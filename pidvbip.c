@@ -111,7 +111,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
     char* channelName;
     unsigned char* list;
     int listlen;
-    int i;
+    uint32_t tag;
 
     if (htsp_get_int(msg,"channelId",&channelId) == 0) { 
       if (htsp_get_int(msg,"channelNumber",&channelNumber) > 0) { channelNumber = -1; }
@@ -123,15 +123,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       {
 	if (listlen > 0){
 	  unsigned char* buf = list;
-	  int type = buf[0]; if (type > 6) { type = 0; }
-	  fprintf(stderr,"type: %i\n",type);
-	  for (i=0;i<sizeof(buf);i++){
-	    fprintf(stderr,"buf int%i: %u\n",i,buf[i]);
-	  }
-	  for (i=0;i<listlen;i++){
-	    fprintf(stderr,"buf int%i: %u\n",i,buf[i]);
-	  }
-	  
+	  tag = buf[6];
 	}
       }
 	      
@@ -172,11 +164,11 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       }
 
       if (strcmp(method,"channelAdd")==0) {
-        channels_add(msg->server, channelNumber,channelId,channelName,channelType,eventid,nexteventid);
-        fprintf(stderr,"channelAdd - id=%d,lcn=%d,name=%s,current_event=%d,next_event=%d\n",channelId,channelNumber,channelName,eventid,nexteventid);
+        channels_add(msg->server, channelNumber,channelId,channelName,channelType,eventid,nexteventid,tag);
+        fprintf(stderr,"channelAdd - id=%d,lcn=%d,name=%s,current_event=%d,next_event=%d\n",channelId,channelNumber,channelName,eventid,nexteventid,tag);
       } else {
-        channels_update(msg->server, channelNumber,channelId,channelName,channelType,eventid,nexteventid);
-        fprintf(stderr,"channelUpdate - id=%d,current_event=%d,next_event=%d\n",channelId,eventid,nexteventid);
+        channels_update(msg->server, channelNumber,channelId,channelName,channelType,eventid,nexteventid,tag);
+        fprintf(stderr,"channelUpdate - id=%d,current_event=%d,next_event=%d\n",channelId,eventid,nexteventid,tag);
       }
     }
   } else if (strcmp(method,"queueStatus")== 0) {
