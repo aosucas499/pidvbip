@@ -17,6 +17,7 @@ struct channel_t
   char* name;
   struct channel_t* next;
   struct channel_t* prev;
+  int tag;
 };
 
 static struct channel_t* channels;
@@ -30,7 +31,7 @@ void channels_init(void)
   channels_cache = NULL;
 }
 
-void channels_add(int server, int lcn, int tvh_id, char* name, int type, uint32_t eventId, uint32_t nextEventId)
+void channels_add(int server, int lcn, int tvh_id, char* name, int type, uint32_t eventId, uint32_t nextEventId, uint32_t tag)
 {
   struct channel_t* p = channels;
   struct channel_t* prev = NULL;
@@ -43,6 +44,7 @@ void channels_add(int server, int lcn, int tvh_id, char* name, int type, uint32_
   new->name = name;
   new->eventId[server] = eventId;
   new->nextEventId[server] = nextEventId;
+  new->tag = tag;
 
   if (channels == NULL) {
     channels = new;
@@ -86,7 +88,7 @@ void channels_add(int server, int lcn, int tvh_id, char* name, int type, uint32_
   }
 }
 
-void channels_update(int server, int lcn, int tvh_id, char* name, int type, uint32_t eventId, uint32_t nextEventId)
+void channels_update(int server, int lcn, int tvh_id, char* name, int type, uint32_t eventId, uint32_t nextEventId, uint32_t tag)
 {
   struct channel_t* p;
 
@@ -101,7 +103,7 @@ void channels_update(int server, int lcn, int tvh_id, char* name, int type, uint
 
   if (p==NULL) {
     fprintf(stderr,"Channel %d not found for update, adding.\n",tvh_id);
-    channels_add(server,lcn,tvh_id,name,type,eventId,nextEventId);
+    channels_add(server,lcn,tvh_id,name,type,eventId,nextEventId,tag);
   } else {
     if (lcn >= 0) p->lcn = lcn;
     if (type) p->type = type;
@@ -111,6 +113,7 @@ void channels_update(int server, int lcn, int tvh_id, char* name, int type, uint
     }
     if (eventId) p->eventId[server] = eventId;
     if (nextEventId) p->nextEventId[server] = nextEventId;
+    if (tag) p->tag = tag;
   }
 }
 
