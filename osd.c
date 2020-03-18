@@ -796,7 +796,6 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
 
 void osd_channellist_display_channels(struct osd_t* osd)
 {
-  fprintf(stderr,"osd_channellist_display_channels\n");
   int num_channels;
   int num_display;
   int i;
@@ -813,7 +812,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
   int first_channel;
 
   int server;
-  char* iso_text1 = "-"; 	
+  char* iso_text1[1]; 	
   char* iso_text2 = NULL; 
   struct tm start_time;
   struct tm stop_time;
@@ -869,7 +868,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
       y += 38;
       free(iso_text); 
       if (iso_text2 != ""){
-	free(iso_text1);
+	//free(iso_text1);
         free(iso_text2);
       }
       id = channels_getnext(id);   
