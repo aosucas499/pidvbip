@@ -828,9 +828,10 @@ void osd_channellist_display_channels(struct osd_t* osd)
         a = channels_gettag(id);
  	break;
       }
+      id = channels_getnext(id);   
     }
     id = osd->channellist_start_channel;
-    fprintf(stderr,"a: %i",a);
+    fprintf(stderr,"a: %u",a);
     for (i = 0; i < num_channels; i++) {
     if (channels_gettag(id) == a){
       if (id == osd->channellist_selected_channel) {
