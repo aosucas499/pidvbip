@@ -795,7 +795,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
 {
   int num_channels;
   int num_display;
-  int i;
+  int i,a;
   int id;
   int selected = 0;
   char str[60];
