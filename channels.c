@@ -392,3 +392,23 @@ int channels_getcount(void)
   /* TODO: Doesn't include deleted channels */
   return next_id;
 }
+
+int channels_gettag(int id)
+{
+  struct channel_t* p;
+
+  if ((channels_cache) && (channels_cache->id == id)) {
+    return channels_cache->tag;;
+  }
+
+  p = channels;
+  while (p) {
+    if (p->id == id) {
+      channels_cache = p;
+      return p->tag;
+    }
+    p = p->next;
+  }
+
+  return -1;
+}
