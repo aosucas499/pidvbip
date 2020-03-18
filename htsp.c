@@ -565,12 +565,11 @@ int htsp_get_intlist(struct htsp_message_t* msg, char* name, unsigned char** dat
 		  fprintf(stderr,"char: %c\n",buf[i]);
 	  }
 	  
+    fprintf(stderr,"type: %i\n",type);  
+	  
     if ((type == HMF_LIST) && (namelength==matchlen) && (memcmp(buf,name,matchlen)==0)) {
       *data = buf + namelength;
       *size = datalength;
-	    for (i=0;i<sizeof(*data);i++){
-		  fprintf(stderr,"char: %c\n",*data[i]);
-	  }
       return 0;
     }
 
