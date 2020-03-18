@@ -671,6 +671,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
 
   int server;
   char* iso_text2 = NULL; 
+  char* iso_text1 = "-"; 
   struct tm start_time;
   struct tm stop_time;
   
@@ -690,13 +691,14 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     //if (event->title) {
     iso_text2 = malloc(strlen(event->title)+3);
     utf8decode(event->title, iso_text2);
-    iso_text2 = "- "+iso_text2;
+    iso_text1 = "-";
   } else {
     iso_text2 = malloc(1);
     iso_text2 = "";
+    iso_text1 = " ";
   }  
 	
-  snprintf(str, sizeof(str), "%d %s %s", channels_getlcn(id), channels_getname(id), iso_text2); 
+  snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id),iso_text1,iso_text2); 
   iso_text = malloc(strlen(str) + 1);
   utf8decode(str, iso_text);        
   (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
@@ -705,6 +707,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
                                           iso_text, strlen(iso_text), 30);
   free(iso_text);
   if (iso_text2 != ""){
+    free(iso_text1);
     free(iso_text2);
   }
   
@@ -727,12 +730,14 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
       iso_text2 = malloc(strlen(event->title)+3);
       utf8decode(event->title, iso_text2);
       iso_text2 = "- "+iso_text2;
+      iso_text1 = "-";
     } else {
       iso_text2 = malloc(1);
       iso_text2 = "";
+      iso_text1 = " ";
     }
 	  
-    snprintf(str, sizeof(str), "%d %s - %s", channels_getlcn(id), channels_getname(id), iso_text2); 
+    snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
     iso_text = malloc(strlen(str) + 1);
     utf8decode(str, iso_text);        
     (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
@@ -742,6 +747,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     //graphics_update_displayed_resource(osd->img, x, y - 50, width, 100);                                        
     free(iso_text);
     if (iso_text2 != ""){
+      free(iso_text1);
       free(iso_text2);
     }
   }
@@ -763,14 +769,15 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     //if (event->title) {
       iso_text2 = malloc(strlen(event->title)+3);
       utf8decode(event->title, iso_text2);
-      iso_text2 = "- "+iso_text2;
+      iso_text1 = "-";
     }
     else {
       iso_text2 = malloc(1);
       iso_text2 = "";
+      iso_text1 = " ";
     }
 	  
-    snprintf(str, sizeof(str), "%d %s - %s", channels_getlcn(id), channels_getname(id), iso_text2); 
+    snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
     iso_text = malloc(strlen(str) + 1);
     utf8decode(str, iso_text);        
     (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
@@ -780,6 +787,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     //graphics_update_displayed_resource(osd->img, x, y, width, 100);                                         
     free(iso_text);
     if (iso_text2 != ""){
+      free(iso_text1);
       free(iso_text2);
     }
   }                                            
@@ -842,13 +850,14 @@ void osd_channellist_display_channels(struct osd_t* osd)
         //if (event->title) {
           iso_text2 = malloc(strlen(event->title)+3);
           utf8decode(event->title, iso_text2);
-	  iso_text2 = "- "+iso_text2;
+	  iso_text1 = "-";
         }
         else {
           iso_text2 = malloc(1);
           iso_text2 = "";
+	  iso_text1 = " ";
         }
-      snprintf(str, sizeof(str), "%d %s - %s", channels_getlcn(id), channels_getname(id), iso_text2); 
+      snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
       iso_text = malloc(strlen(str) + 1);
       utf8decode(str, iso_text);
       (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
@@ -860,6 +869,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
       y += 38;
       free(iso_text); 
       if (iso_text2 != ""){
+	free(iso_text1);
         free(iso_text2);
       }
       id = channels_getnext(id);   
