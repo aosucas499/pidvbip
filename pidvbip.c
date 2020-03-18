@@ -126,8 +126,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
 	  int type = buf[0]; if (type > 6) { type = 0; }
 	  fprintf(stderr,"type: %i\n",type);
 	  for (i=0;i<sizeof(buf);i++){
-	    fprintf(stderr,"buf int: %i",buf[i]);
-	    fprintf(stderr,"buf char: %c",buf[i]);
+	    fprintf(stderr,"buf int%i: %u\n",i,buf[i]);
 	  }
 	  
 	}
