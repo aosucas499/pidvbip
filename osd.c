@@ -828,14 +828,18 @@ void osd_channellist_display_channels(struct osd_t* osd)
         color = COLOR_TEXT;
         bg_color = COLOR_BACKGROUND;
       } 
-      
+      fprintf(stderr,"osd_channellist_display_channels 1");
       channels_geteventid(id, &osd->event, &server);
+      fprintf(stderr,"osd_channellist_display_channels 2");
       channels_getnexteventid(id, &osd->nextEvent, &server);
+      fprintf(stderr,"osd_channellist_display_channels 3");
 
       struct event_t* event = event_copy(osd->event, server);
+	    fprintf(stderr,"osd_channellist_display_channels 4");
       struct event_t* nextEvent = event_copy(osd->nextEvent, server);
-
-      if (event){	
+fprintf(stderr,"osd_channellist_display_channels 5");
+      if (event != NULL && id > 0){
+	      fprintf(stderr,"osd_channellist_display_channels 6");
         /* Start/stop time - current event */
         localtime_r((time_t*)&event->start, &start_time);
         localtime_r((time_t*)&event->stop, &stop_time);
