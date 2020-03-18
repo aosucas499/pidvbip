@@ -119,8 +119,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       if (htsp_get_uint(msg,"eventId",&eventid) > 0) { eventid = 0; }
       if (htsp_get_uint(msg,"nextEventId",&nexteventid) > 0) { nexteventid = 0; }
       channelName = htsp_get_string(msg,"channelName");
-      htsp_get_int64(msg,"tags",&tags);
-      fprintf(stderr,"tags: %ul\n",tags);
+
       if (htsp_get_list(msg,"tags",&tagslist,&tagslistlen) == 0)
       {
         fprintf(stderr,"tagslen: %i\n",tagslistlen);
