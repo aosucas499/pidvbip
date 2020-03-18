@@ -809,8 +809,8 @@ void osd_channellist_display_channels(struct osd_t* osd)
   int first_channel;
 
   int server;
-  char* iso_text1 = "-"; 	
-  char* iso_text2 = NULL; 
+  char* iso_text1 = "-";
+  char* iso_text2 = NULL;
   struct tm start_time;
   struct tm stop_time;
   
@@ -823,6 +823,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
     id = osd->channellist_start_channel;
     
     for (i = 0; i < num_display; i++) {
+    if (channels_gettag(id) == 1){
       if (id == osd->channellist_selected_channel) {
         selected = 1;
         osd->channellist_selected_pos = i;
@@ -874,6 +875,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
         }  
         break;
       }
+    }
     }
     osd_channellist_show_epg(osd, osd->channellist_selected_channel);    
   }
