@@ -813,7 +813,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
   char* iso_text2 = NULL;
   struct tm start_time;
   struct tm stop_time;
-  uint32_t a;
+  int a;
 	
   num_channels = channels_getcount();
   first_channel = channels_getfirst();
