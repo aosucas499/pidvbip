@@ -876,6 +876,8 @@ void osd_channellist_display_channels(struct osd_t* osd)
         }  
         break;
       }
+    } else {
+      id = channels_getnext(id);   
     }
     }
     osd_channellist_show_epg(osd, osd->channellist_selected_channel);    
