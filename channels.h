@@ -10,8 +10,8 @@
 #define CTYPE_RADIO   4
 
 void channels_init(void);
-void channels_add(int server, int lcn, int tvh_id, char* name, int type, uint32_t eventId, uint32_t nextEventId, uint32_t tag);
-void channels_update(int server, int lcn, int tvh_id, char* name, int type, uint32_t eventId, uint32_t nextEventId, uint32_t tag);
+void channels_add(int server, int lcn, int tvh_id, char* name, int type, uint32_t eventId, uint32_t nextEventId, int tag);
+void channels_update(int server, int lcn, int tvh_id, char* name, int type, uint32_t eventId, uint32_t nextEventId, int tag);
 void channels_dump(void);
 int channels_getid(int lcn);
 char* channels_getname(int id);
