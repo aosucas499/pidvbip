@@ -812,7 +812,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
   int first_channel;
 
   int server;
-  char* iso_text1[1]; 	
+  char* iso_text1 = "-"; 	
   char* iso_text2 = NULL; 
   struct tm start_time;
   struct tm stop_time;
