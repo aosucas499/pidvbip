@@ -845,12 +845,13 @@ fprintf(stderr,"osd_channellist_display_channels test3\n");
 fprintf(stderr,"osd_channellist_display_channels test4\n");
       struct event_t* nextEvent = event_copy(osd->nextEvent, server);
 fprintf(stderr,"osd_channellist_display_channels test5\n");
+	if (event){
         /* Start/stop time - current event */
         localtime_r((time_t*)&event->start, &start_time);
 fprintf(stderr,"osd_channellist_display_channels test6\n");
         localtime_r((time_t*)&event->stop, &stop_time);
 fprintf(stderr,"osd_channellist_display_channels test7\n");
-        if (event->title) {
+        //if (event->title) {
 fprintf(stderr,"osd_channellist_display_channels test8\n");
           iso_text2 = malloc(strlen(event->title)+1);
 fprintf(stderr,"osd_channellist_display_channels test9\n");
