@@ -821,10 +821,16 @@ void osd_channellist_display_channels(struct osd_t* osd)
     // display max CHANNELLIST_NUM_CHANNELS channels
     num_display = num_channels > CHANNELLIST_NUM_CHANNELS ? CHANNELLIST_NUM_CHANNELS : num_channels;
     id = osd->channellist_start_channel;
-    
+
+    for (a = 1; a < 5; a++){
+      for (i = 0; i < num_channels; i++) {
+        if (id == osd->channellist_selected_channel) {
+	  break;
+	}
+	id = channels_getnext(id);
+    }
     for (i = 0; i < num_channels; i++) {
-	    fprintf(stderr,"id: %i   tag: %i\n",id,channels_gettag(id));
-    if (channels_gettag(id) == 1){
+    if (channels_gettag(id) == a){
       if (id == osd->channellist_selected_channel) {
         selected = 1;
         osd->channellist_selected_pos = i;
