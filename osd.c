@@ -828,6 +828,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
 	  break;
 	}
 	id = channels_getnext(id);
+      }
     }
     for (i = 0; i < num_channels; i++) {
     if (channels_gettag(id) == a){
