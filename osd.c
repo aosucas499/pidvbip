@@ -879,7 +879,9 @@ fprintf(stderr,"osd_channellist_display_channels test14\n");
 fprintf(stderr,"osd_channellist_display_channels test15\n");
       free(iso_text); 
 fprintf(stderr,"osd_channellist_display_channels test16\n");
-      free(iso_text2);
+      if (iso_text2 != ""){
+        free(iso_text2);
+      }
 fprintf(stderr,"osd_channellist_display_channels test17\n");
       id = channels_getnext(id);   
       if (id == first_channel) {
