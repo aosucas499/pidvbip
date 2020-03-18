@@ -835,18 +835,23 @@ void osd_channellist_display_channels(struct osd_t* osd)
       struct event_t* event = event_copy(osd->event, server);
       struct event_t* nextEvent = event_copy(osd->nextEvent, server);
 
-      /* Start/stop time - current event */
-      localtime_r((time_t*)&event->start, &start_time);
-      localtime_r((time_t*)&event->stop, &stop_time);
-      if (event->title) {
-        iso_text2 = malloc(strlen(event->title)+1);
-        utf8decode(event->title, iso_text2);
-      }
-      else {
+      if (event){	
+        /* Start/stop time - current event */
+        localtime_r((time_t*)&event->start, &start_time);
+        localtime_r((time_t*)&event->stop, &stop_time);
+        if (event->title) {
+          iso_text2 = malloc(strlen(event->title)+1);
+          utf8decode(event->title, iso_text2);
+        }
+        else {
+          iso_text2 = malloc(1);
+          iso_text2 = "";
+        }
+      } else {
         iso_text2 = malloc(1);
         iso_text2 = "";
-      }
-	    
+      }  
+	        
       snprintf(str, sizeof(str), "%d %s - %s", channels_getlcn(id), channels_getname(id), iso_text2); 
       iso_text = malloc(strlen(str) + 1);
       utf8decode(str, iso_text);        
