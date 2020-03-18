@@ -25,5 +25,6 @@ int channels_getprev(int id);
 int channels_getfirst(void);
 int channels_getlast(void);
 int channels_getcount(void);
+int channels_gettag(int id);
 
 #endif
