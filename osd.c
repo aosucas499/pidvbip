@@ -707,7 +707,6 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
                                           iso_text, strlen(iso_text), 30);
   free(iso_text);
   if (iso_text2 != ""){
-    free(iso_text1);
     free(iso_text2);
   }
   
@@ -746,7 +745,6 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     //graphics_update_displayed_resource(osd->img, x, y - 50, width, 100);                                        
     free(iso_text);
     if (iso_text2 != ""){
-      free(iso_text1);
       free(iso_text2);
     }
   }
@@ -786,7 +784,6 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     //graphics_update_displayed_resource(osd->img, x, y, width, 100);                                         
     free(iso_text);
     if (iso_text2 != ""){
-      free(iso_text1);
       free(iso_text2);
     }
   }                                            
@@ -868,7 +865,6 @@ void osd_channellist_display_channels(struct osd_t* osd)
       y += 38;
       free(iso_text); 
       if (iso_text2 != ""){
-	//free(iso_text1);
         free(iso_text2);
       }
       id = channels_getnext(id);   
