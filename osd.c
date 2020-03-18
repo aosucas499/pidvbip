@@ -590,7 +590,6 @@ void osd_channellist_show_info(struct osd_t* osd, int channel_id)
 
 void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
 {
-  fprintf(stderr,"osd_channellist_show_epg\n");
   int server;
   char str[128];
   struct tm start_time;
@@ -689,14 +688,15 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     localtime_r((time_t*)&event->start, &start_time);
     localtime_r((time_t*)&event->stop, &stop_time);
     //if (event->title) {
-    iso_text2 = malloc(strlen(event->title)+1);
+    iso_text2 = malloc(strlen(event->title)+3);
     utf8decode(event->title, iso_text2);
+    iso_text2 = "- "+iso_text2;
   } else {
     iso_text2 = malloc(1);
     iso_text2 = "";
   }  
 	
-  snprintf(str, sizeof(str), "%d %s - %s", channels_getlcn(id), channels_getname(id), iso_text2); 
+  snprintf(str, sizeof(str), "%d %s %s", channels_getlcn(id), channels_getname(id), iso_text2); 
   iso_text = malloc(strlen(str) + 1);
   utf8decode(str, iso_text);        
   (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
@@ -724,8 +724,9 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
       localtime_r((time_t*)&event->start, &start_time);
       localtime_r((time_t*)&event->stop, &stop_time);
     //if (event->title) {
-      iso_text2 = malloc(strlen(event->title)+1);
+      iso_text2 = malloc(strlen(event->title)+3);
       utf8decode(event->title, iso_text2);
+      iso_text2 = "- "+iso_text2;
     } else {
       iso_text2 = malloc(1);
       iso_text2 = "";
@@ -760,8 +761,9 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
       localtime_r((time_t*)&event->start, &start_time);
       localtime_r((time_t*)&event->stop, &stop_time);
     //if (event->title) {
-      iso_text2 = malloc(strlen(event->title)+1);
+      iso_text2 = malloc(strlen(event->title)+3);
       utf8decode(event->title, iso_text2);
+      iso_text2 = "- "+iso_text2;
     }
     else {
       iso_text2 = malloc(1);
@@ -838,8 +840,9 @@ void osd_channellist_display_channels(struct osd_t* osd)
           localtime_r((time_t*)&event->start, &start_time);
           localtime_r((time_t*)&event->stop, &stop_time);
         //if (event->title) {
-          iso_text2 = malloc(strlen(event->title)+1);
+          iso_text2 = malloc(strlen(event->title)+3);
           utf8decode(event->title, iso_text2);
+	  iso_text2 = "- "+iso_text2;
         }
         else {
           iso_text2 = malloc(1);
