@@ -127,7 +127,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
 	//int type = buflist[0]; if (type > 6) { type = 0; }
       }
 	      
-      if (htsp_get_list(msg,"services",&list,&listlen) > 0)
+      if (htsp_get_intlist(msg,"services",&list,&listlen) > 0)
       {
         channelType = CTYPE_NONE;
       } else {
