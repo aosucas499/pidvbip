@@ -822,7 +822,8 @@ void osd_channellist_display_channels(struct osd_t* osd)
     num_display = num_channels > CHANNELLIST_NUM_CHANNELS ? CHANNELLIST_NUM_CHANNELS : num_channels;
     id = osd->channellist_start_channel;
     
-    for (i = 0; i < num_display; i++) {      
+    for (i = 0; i < num_display; i++) {
+	    fprintf(stderr,"osd_channellist_display_channels %i\n"),i;
       if (id == osd->channellist_selected_channel) {
         selected = 1;
         osd->channellist_selected_pos = i;
@@ -840,7 +841,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
 
       struct event_t* event = event_copy(osd->event, server);
       struct event_t* nextEvent = event_copy(osd->nextEvent, server);
-      if (event != NULL && id > 0){
+
         /* Start/stop time - current event */
         localtime_r((time_t*)&event->start, &start_time);
         localtime_r((time_t*)&event->stop, &stop_time);
@@ -852,10 +853,6 @@ void osd_channellist_display_channels(struct osd_t* osd)
           iso_text2 = malloc(1);
           iso_text2 = "";
         }
-      } else {
-        iso_text2 = malloc(1);
-        iso_text2 = "";
-      }  
 	        
       snprintf(str, sizeof(str), "%d %s - %s", channels_getlcn(id), channels_getname(id), iso_text2); 
       iso_text = malloc(strlen(str) + 1);
