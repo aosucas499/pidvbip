@@ -120,11 +120,11 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       if (htsp_get_uint(msg,"nextEventId",&nexteventid) > 0) { nexteventid = 0; }
       channelName = htsp_get_string(msg,"channelName");
 
-      if (htsp_get_intlist(msg,"tags",&tagslist,&tagslistlen) == 0)
+      if (htsp_get_intlist(msg,"tags",&list,&listlen) == 0)
       {
-        fprintf(stderr,"tagslen: %i\n",tagslistlen);
-	unsigned char* buflist = tagslist;
-	//int type = buflist[0]; if (type > 6) { type = 0; }
+        fprintf(stderr,"tagslen: %i\n",listlen);
+	unsigned char* buf = list;
+	int type = buf[0]; if (type > 6) { type = 0; }
       }
 	      
       if (htsp_get_intlist(msg,"services",&list,&listlen) > 0)
