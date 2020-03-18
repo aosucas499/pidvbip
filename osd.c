@@ -822,7 +822,8 @@ void osd_channellist_display_channels(struct osd_t* osd)
     num_display = num_channels > CHANNELLIST_NUM_CHANNELS ? CHANNELLIST_NUM_CHANNELS : num_channels;
     id = osd->channellist_start_channel;
     
-    for (i = 0; i < num_display; i++) {
+    for (i = 0; i < num_channels; i++) {
+	    fprintf(stderr,"id: %i   tag: %i\n",id,channels_gettag(id));
     if (channels_gettag(id) == 1){
       if (id == osd->channellist_selected_channel) {
         selected = 1;
