@@ -128,6 +128,9 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
 	  for (i=0;i<sizeof(buf);i++){
 	    fprintf(stderr,"buf int%i: %u\n",i,buf[i]);
 	  }
+	  for (i=0;i<listlen;i++){
+	    fprintf(stderr,"buf int%i: %u\n",i,buf[i]);
+	  }
 	  
 	}
       }
