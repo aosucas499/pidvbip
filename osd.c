@@ -817,6 +817,7 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
   struct tm start_time;
   struct tm stop_time;
   int a;
+  int j = 0;
 	
   num_channels = channels_getcount();
   first_channel = channels_getfirst();
@@ -864,6 +865,10 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
     fprintf(stderr,"id: %u\n",id);
     for (i = 0; i < num_display; i++) {
     if (channels_gettag(id) == a){
+      j++;
+      if (lor > 0 && j == 1){
+        osd->channellist_selected_channel = id;
+      }
       if (id == osd->channellist_selected_channel) {
         selected = 1;
         osd->channellist_selected_pos = i;
@@ -1013,7 +1018,7 @@ int osd_process_key(struct osd_t* osd, int c) {
     switch (c) {
       case 'k':
 	osd_clear(osd);
-        osd->channellist_start_channel = channels_getfirst();		    
+        osd->channellist_start_channel = channels_getfirst();
         osd_channellist_display(osd,1);
 	fprintf(stderr,"links\n");
 	break;
