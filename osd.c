@@ -124,7 +124,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
    const char *split = text;
    int32_t s=0;
 
-   if ((!text) || ((text_length=strlen(text))==0))
+   if ((!text) || ((text_length=strlen(text))==0) || y_offset > 500)
       return 0;
 
    //fprintf(stderr,"render_paragraph(\"%s\",%d)\n",text,text_length);
@@ -185,7 +185,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
       if (s!=0) return s;
    }
    fprintf(stderr,"y_offset: %u\n",y_offset);
-   if (text[line_length] && y_offset < 500) {
+   if (text[line_length]) {
      return render_paragraph(img, text + line_length+1, text_size, x_offset, y_offset + height,img_w);
    } else {
      return 0;
