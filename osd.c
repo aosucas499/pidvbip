@@ -794,7 +794,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   graphics_update_displayed_resource(osd->img, 0, 0, SCREENWIDTH,SCREENHEIGHT);                                        
 }
 
-void osd_channellist_display_channels(struct osd_t* osd)
+void osd_channellist_display_channels(struct osd_t* osd, int lor )
 {
   int num_channels;
   int num_display;
@@ -834,8 +834,22 @@ void osd_channellist_display_channels(struct osd_t* osd)
       id = channels_getnext(id);   
     }
 	  
+    if (lor == 1){
+      if (a == 1){
+        a=4;
+      } else {
+        a--;
+      }
+    } else if (lor == 2){
+      if (a == 4){
+        a=1;
+      } else {
+        a++;
+      }
+    }
+	  
     snprintf(str, sizeof(str), "TV"); 
-    (void)graphics_resource_render_text_ext(osd->img, x, y - 10, width, height,
+    (void)graphics_resource_render_text_ext(osd->img, x, y - 5, width, height,
                                             COLOR_TITLE_TEXT,         /* fg */
                                             bg_color,      /* bg */
                                             str, strlen(str), 40);
@@ -908,7 +922,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
 /*
  * Displays the channellist window
  */
-void osd_channellist_display(struct osd_t* osd)
+void osd_channellist_display(struct osd_t* osd, int lor)
 {   
   uint32_t width = 780;
   uint32_t height = 720 - 2 * OSD_YMARGIN;
@@ -917,7 +931,7 @@ void osd_channellist_display(struct osd_t* osd)
   osd_draw_window(osd, OSD_XMARGIN, OSD_YMARGIN, width, 60);
   osd_draw_window(osd, OSD_XMARGIN, OSD_YMARGIN + 80, width, height);
   
-  osd_channellist_display_channels(osd);
+  osd_channellist_display_channels(osd,lor);
   
   graphics_update_displayed_resource(osd->img, 0, 0, 0, 0);
   pthread_mutex_unlock(&osd->osd_mutex);
