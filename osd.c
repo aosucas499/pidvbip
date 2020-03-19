@@ -127,7 +127,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
    if ((!text) || ((text_length=strlen(text))==0) || y_offset >= 598)
       return 0;
 
-   fprintf(stderr,"y_offset: %u\n",y_offset);
+   //fprintf(stderr,"y_offset: %u\n",y_offset);
 	
    //fprintf(stderr,"render_paragraph(\"%s\",%d)\n",text,text_length);
 
@@ -1018,13 +1018,11 @@ int osd_process_key(struct osd_t* osd, int c) {
   if (osd->osd_state == OSD_CHANNELLIST) {
     switch (c) {
       case 'k':
-	fprintf(stderr,"links\n");
 	osd_clear(osd);
         osd->channellist_start_channel = channels_getfirst();
         osd_channellist_display(osd,1);
 	break;
       case 'l':
-	fprintf(stderr,"rechts\n");
 	osd_clear(osd);
 	osd->channellist_start_channel = channels_getfirst();
 	osd_channellist_display(osd,2);
