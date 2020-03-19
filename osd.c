@@ -844,10 +844,10 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
       }
     }
   
-    snprintf(str, sizeof(str), "%s", tags[a]); 
+    snprintf(str, sizeof(str), "%s", tags[a-1]); 
     (void)graphics_resource_render_text_ext(osd->img, x, y - 5, width, height,
                                             COLOR_TITLE_TEXT,         /* fg */
-                                            bg_color,      /* bg */
+                                            COLOR_BACKGROUND,      /* bg */
                                             str, strlen(str), 40);
 	  
     for (i = 0; i < num_channels; i++) {
