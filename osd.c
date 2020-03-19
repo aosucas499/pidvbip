@@ -826,14 +826,18 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
     num_display = num_channels > CHANNELLIST_NUM_CHANNELS ? CHANNELLIST_NUM_CHANNELS : num_channels;
     id = osd->channellist_start_channel;
 
-    for (i = 0; i < num_channels; i++) {
-      if (id == osd->channellist_selected_channel) {
-        a = channels_gettag(id);
- 	break;
-      }
-      id = channels_getnext(id);
-    }
-    fprintf(stderr,"a: %i\n",a);
+    //for (i = 0; i < num_channels; i++) {
+    //  if (id == osd->channellist_selected_channel) {
+    //    a = channels_gettag(id);
+    //    break;
+    //  }
+    //  id = channels_getnext(id);
+    //}
+
+    a = channels_gettag(osd->channellist_selected_channel);
+	  
+    fprintf(stderr,"a1: %i\n",a);
+	  
     if (lor == 1){
       if (a == 1){
         a=4;
@@ -847,15 +851,17 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
         a++;
       }
     }
+
+    fprintf(stderr,"a2: %i\n",a);
 	  
-    snprintf(str, sizeof(str), "TV"); 
+    snprintf(str, sizeof(str), "%i", a); 
     (void)graphics_resource_render_text_ext(osd->img, x, y - 5, width, height,
                                             COLOR_TITLE_TEXT,         /* fg */
                                             bg_color,      /* bg */
                                             str, strlen(str), 40);
 	  
     id = osd->channellist_start_channel;
-    fprintf(stderr,"a: %u",a);
+    fprintf(stderr,"id: %u\n",id);
     for (i = 0; i < num_display; i++) {
     if (channels_gettag(id) == a){
       if (id == osd->channellist_selected_channel) {
@@ -1007,11 +1013,13 @@ int osd_process_key(struct osd_t* osd, int c) {
     switch (c) {
       case 'k':
 	osd_clear(osd);
+        osd->channellist_start_channel = channels_getfirst();		    
         osd_channellist_display(osd,1);
 	fprintf(stderr,"links\n");
 	break;
       case 'l':
 	osd_clear(osd);
+	osd->channellist_start_channel = channels_getfirst();
 	osd_channellist_display(osd,2);
 	fprintf(stderr,"rechts\n");
 	break;
