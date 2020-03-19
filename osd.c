@@ -1010,7 +1010,7 @@ int osd_process_key(struct osd_t* osd, int c) {
           // On bottom
           osd->channellist_selected_channel = channels_getnext(osd->channellist_selected_channel);   
           osd->channellist_start_channel = osd->channellist_selected_channel;
-          osd_channellist_display(osd);          
+          osd_channellist_display(osd,0);          
         }
         else {
           osd->channellist_prev_selected_channel = osd->channellist_selected_channel;
@@ -1029,7 +1029,7 @@ int osd_process_key(struct osd_t* osd, int c) {
           for (i = 0; i < num_ch_dsp; i++) {
             osd->channellist_start_channel = channels_getprev(osd->channellist_start_channel);
           }  
-          osd_channellist_display(osd);          
+          osd_channellist_display(osd,0);          
         }
         else {
           osd->channellist_prev_selected_channel = osd->channellist_selected_channel;
@@ -1048,7 +1048,7 @@ int osd_process_key(struct osd_t* osd, int c) {
         }
         osd->channellist_selected_channel = id;
         osd->channellist_start_channel = id;
-        osd_channellist_display(osd);
+        osd_channellist_display(osd,0);
         break;
       case 'p':
         // Prev page
@@ -1062,7 +1062,7 @@ int osd_process_key(struct osd_t* osd, int c) {
         }
         osd->channellist_selected_channel = id;
         osd->channellist_start_channel = id;
-        osd_channellist_display(osd);        
+        osd_channellist_display(osd,0);        
         break;
       case 'i':
         osd_clear(osd);
