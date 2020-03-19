@@ -1005,6 +1005,10 @@ int osd_process_key(struct osd_t* osd, int c) {
   
   if (osd->osd_state == OSD_CHANNELLIST) {
     switch (c) {
+      case 'C':
+        osd_channellist_display(osd,1);
+      case 'D':
+	osd_channellist_display(osd,2);	    
       case 'd':
         if (osd_channellist_selected_position(osd) == CHANNELLIST_BOTTOM) {
           // On bottom
