@@ -170,6 +170,8 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
      }
    }
 
+   text++ = "\n1";
+	
    if (line_length) {
      //int i;
      //fprintf(stderr,"Rendering: ");
