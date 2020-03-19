@@ -57,7 +57,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #define COLOR_SELECTED_BACKGROUND GRAPHICS_RGBA32(0xff,0xff,0xff,0xff)
 //#define COLOR_SELECTED_BACKGROUND GRAPHICS_RGBA32(0xff,0,0,0x80)
 #define COLOR_TITLE_TEXT GRAPHICS_RGBA32(0x00,0xff,0xff,0xff)
-#define CHANNELLIST_NUM_CHANNELS 12
+#define CHANNELLIST_NUM_CHANNELS 13
 #define CHANNELLIST_UP 1
 #define CHANNELLIST_DOWN 2
 
@@ -891,7 +891,7 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
       snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
       iso_text = malloc(strlen(str) + 1);
       utf8decode(str, iso_text);
-      (void)graphics_resource_render_text_ext(osd->img, x, y + 80, width, height,
+      (void)graphics_resource_render_text_ext(osd->img, x, y + 70, width, height,
                                             color,         /* fg */
                                             bg_color,      /* bg */
                                             iso_text, strlen(iso_text), 30);
@@ -924,11 +924,11 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
 void osd_channellist_display(struct osd_t* osd, int lor)
 {   
   uint32_t width = 780;
-  uint32_t height = 540 - 2 * OSD_YMARGIN;
+  uint32_t height = 550 - 2 * OSD_YMARGIN;
   
   pthread_mutex_lock(&osd->osd_mutex);
   osd_draw_window(osd, OSD_XMARGIN, OSD_YMARGIN, width, 60);
-  osd_draw_window(osd, OSD_XMARGIN, OSD_YMARGIN + 80, width, height);
+  osd_draw_window(osd, OSD_XMARGIN, OSD_YMARGIN + 70, width, height);
   
   osd_channellist_display_channels(osd,lor);
   
