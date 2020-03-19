@@ -113,7 +113,7 @@ void channels_update(int server, int lcn, int tvh_id, char* name, int type, uint
     }
     if (eventId) p->eventId[server] = eventId;
     if (nextEventId) p->nextEventId[server] = nextEventId;
-    if (tag) p->tag = tag;
+    //if (tag) p->tag = tag;
   }
 }
 
