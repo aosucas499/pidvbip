@@ -831,9 +831,9 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
         a = channels_gettag(id);
  	break;
       }
-      id = channels_getnext(id);   
+      id = channels_getnext(id);
     }
-	  
+    fprintf(stderr,"a: %i\n",a);
     if (lor == 1){
       if (a == 1){
         a=4;
@@ -1007,9 +1007,11 @@ int osd_process_key(struct osd_t* osd, int c) {
     switch (c) {
       case 'k':
         osd_channellist_display(osd,1);
+	fprintf(stderr,"links");
 	break;
       case 'l':
 	osd_channellist_display(osd,2);
+	fprintf(stderr,"rechts");
 	break;
       case 'd':
         if (osd_channellist_selected_position(osd) == CHANNELLIST_BOTTOM) {
