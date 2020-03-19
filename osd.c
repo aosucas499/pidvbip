@@ -127,11 +127,17 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
    if ((!text) || ((text_length=strlen(text))==0) || y_offset >= 598)
       return 0;
 
+   fprintf(stderr,"y_offset: %u\n",y_offset);
+	
    //fprintf(stderr,"render_paragraph(\"%s\",%d)\n",text,text_length);
 
-   s = graphics_resource_text_dimensions_ext(img, text, text_length, &width, &height, text_size);
-   if (s != 0) return s;
-
+   if (text_length > 100){
+     width = 9999;
+   } else {
+     s = graphics_resource_text_dimensions_ext(img, text, text_length, &width, &height, text_size);
+     if (s != 0) return s;
+   }
+	   
    if (width <= img_w) {
      /* We can display the whole line */
      line_length = text_length;
@@ -149,12 +155,18 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        /* No spaces, within img_w. Just go through character by character */
        line_length = 0;
        do {
-         line_length++;
+         line_length = line_length+10;
          s = graphics_resource_text_dimensions_ext(img, text, text_length, &width, &height, text_size);
          if (s != 0) return s;
        } while (width < img_w);
 
-       line_length--;
+       do {
+         line_length--;
+         s = graphics_resource_text_dimensions_ext(img, text, text_length, &width, &height, text_size);
+         if (s != 0) return s;
+       } while (width > img_w);
+	     
+       //line_length--;
      } else {
        /* We have at least one space, so can split line on a space */
        width = 0;
@@ -169,8 +181,6 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        }
      }
    }
-
-   text++ = "\n1";
 	
    if (line_length) {
      //int i;
@@ -186,7 +196,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
                                      text, line_length, text_size);
       if (s!=0) return s;
    }
-   fprintf(stderr,"y_offset: %u\n",y_offset);
+
    if (text[line_length]) {
      return render_paragraph(img, text + line_length+1, text_size, x_offset, y_offset + height,img_w);
    } else {
