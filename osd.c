@@ -818,6 +818,7 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
   struct tm stop_time;
   int a;
   int j = 0;
+  char tags[4][10] = {"TV","SKY","SPORT","KIKA"};
 	
   num_channels = channels_getcount();
   first_channel = channels_getfirst();
@@ -827,17 +828,7 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
     num_display = num_channels > CHANNELLIST_NUM_CHANNELS ? CHANNELLIST_NUM_CHANNELS : num_channels;
     id = osd->channellist_start_channel;
 
-    //for (i = 0; i < num_channels; i++) {
-    //  if (id == osd->channellist_selected_channel) {
-    //    a = channels_gettag(id);
-    //    break;
-    //  }
-    //  id = channels_getnext(id);
-    //}
-
     a = channels_gettag(osd->channellist_selected_channel);
-	  
-    fprintf(stderr,"a1: %i\n",a);
 	  
     if (lor == 1){
       if (a == 1){
@@ -852,10 +843,8 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
         a++;
       }
     }
-
-    fprintf(stderr,"a2: %i\n",a);
-	  
-    snprintf(str, sizeof(str), "%i", a); 
+  
+    snprintf(str, sizeof(str), "%s", tags[a]); 
     (void)graphics_resource_render_text_ext(osd->img, x, y - 5, width, height,
                                             COLOR_TITLE_TEXT,         /* fg */
                                             bg_color,      /* bg */
@@ -865,10 +854,8 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
     if (channels_gettag(id) == a){
       j++;
       if (j > num_display){break;};
-      fprintf(stderr,"j: %i\n",j);
       if (lor > 0 && j == 1){
         osd->channellist_selected_channel = id;
-	fprintf(stderr,"id: %u\n",id);
       }
       if (id == osd->channellist_selected_channel) {
         selected = 1;
