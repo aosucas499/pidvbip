@@ -1006,12 +1006,14 @@ int osd_process_key(struct osd_t* osd, int c) {
   if (osd->osd_state == OSD_CHANNELLIST) {
     switch (c) {
       case 'k':
+	osd_clear(osd);
         osd_channellist_display(osd,1);
-	fprintf(stderr,"links");
+	fprintf(stderr,"links\n");
 	break;
       case 'l':
+	osd_clear(osd);
 	osd_channellist_display(osd,2);
-	fprintf(stderr,"rechts");
+	fprintf(stderr,"rechts\n");
 	break;
       case 'd':
         if (osd_channellist_selected_position(osd) == CHANNELLIST_BOTTOM) {
