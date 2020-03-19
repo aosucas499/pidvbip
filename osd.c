@@ -184,6 +184,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
                                      text, line_length, text_size);
       if (s!=0) return s;
    }
+   fprintf(stderr,"height: %u\n",height)
    if (text[line_length]) {
      return render_paragraph(img, text + line_length+1, text_size, x_offset, y_offset + height,img_w);
    } else {
@@ -625,13 +626,13 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   (void)graphics_resource_render_text_ext(osd->img, 10 + OSD_XMARGIN + 800, OSD_YMARGIN + 20, SCREENWIDTH - 800 - 2 * OSD_XMARGIN, 50,
                                      GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
                                      GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
-                                     str, strlen(str), 30);
+                                     str, strlen(str), 28);
   free(iso_text);
   
   if (event->description) {
     char* iso_text = malloc(strlen(event->description)+1);
     utf8decode(event->description,iso_text);
-    render_paragraph(osd->img,iso_text,26,800 + OSD_XMARGIN + 10,OSD_YMARGIN + 70, SCREENWIDTH - 800 - 2 * OSD_XMARGIN);
+    render_paragraph(osd->img,iso_text,24,800 + OSD_XMARGIN + 10,OSD_YMARGIN + 70, SCREENWIDTH - 800 - 2 * OSD_XMARGIN);
     free(iso_text);
   }
 
