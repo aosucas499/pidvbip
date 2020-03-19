@@ -861,9 +861,10 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
                                             bg_color,      /* bg */
                                             str, strlen(str), 40);
 	  
-    for (i = 0; i < num_display; i++) {
+    for (i = 0; i < num_channels; i++) {
     if (channels_gettag(id) == a){
       j++;
+      if (j > num_display){break;};
       fprintf(stderr,"j: %i\n",j);
       if (lor > 0 && j == 1){
         osd->channellist_selected_channel = id;
