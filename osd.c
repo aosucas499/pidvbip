@@ -56,6 +56,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #define COLOR_BACKGROUND GRAPHICS_RGBA32(0,0,0,0x80)
 #define COLOR_SELECTED_BACKGROUND GRAPHICS_RGBA32(0xff,0xff,0xff,0xff)
 //#define COLOR_SELECTED_BACKGROUND GRAPHICS_RGBA32(0xff,0,0,0x80)
+#define COLOR_TITLE_TEXT GRAPHICS_RGBA32(0x00,0xff,0xff,0xff)
 #define CHANNELLIST_NUM_CHANNELS 18
 #define CHANNELLIST_UP 1
 #define CHANNELLIST_DOWN 2
@@ -803,7 +804,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
   char str[60];
   uint32_t width = 740;
   uint32_t height = 38;
-  uint32_t x = OSD_XMARGIN + 20;
+  uint32_t x = OSD_XMARGIN + 20 + 80;
   uint32_t y = OSD_YMARGIN + 20;
   uint32_t color;
   uint32_t bg_color;
@@ -832,6 +833,13 @@ void osd_channellist_display_channels(struct osd_t* osd)
       }
       id = channels_getnext(id);   
     }
+	  
+    snprintf(str, sizeof(str), "TV"); 
+    (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
+                                            COLOR_TITLE_TEXT,         /* fg */
+                                            bg_color,      /* bg */
+                                            str, strlen(str), 40);
+	  
     id = osd->channellist_start_channel;
     fprintf(stderr,"a: %u",a);
     for (i = 0; i < num_display; i++) {
@@ -905,7 +913,8 @@ void osd_channellist_display(struct osd_t* osd)
   uint32_t height = 720 - 2 * OSD_YMARGIN;
   
   pthread_mutex_lock(&osd->osd_mutex);
-  osd_draw_window(osd, OSD_XMARGIN, OSD_YMARGIN, width, height);
+  osd_draw_window(osd, OSD_XMARGIN, OSD_YMARGIN, width, 60);
+  osd_draw_window(osd, OSD_XMARGIN + 80, OSD_YMARGIN, width, height);
   
   osd_channellist_display_channels(osd);
   
