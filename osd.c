@@ -861,17 +861,17 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
                                             bg_color,      /* bg */
                                             str, strlen(str), 40);
 	  
-    id = osd->channellist_start_channel;
-    fprintf(stderr,"id: %u\n",id);
     for (i = 0; i < num_display; i++) {
     if (channels_gettag(id) == a){
       j++;
+      fprintf(stderr,"j: %i\n",j);
       if (lor > 0 && j == 1){
         osd->channellist_selected_channel = id;
+	fprintf(stderr,"id: %u\n",id);
       }
       if (id == osd->channellist_selected_channel) {
         selected = 1;
-        osd->channellist_selected_pos = i;
+        osd->channellist_selected_pos = j;
         color = COLOR_SELECTED_TEXT;
         bg_color = COLOR_SELECTED_BACKGROUND;
       }
@@ -925,7 +925,7 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
       id = channels_getnext(id);   
     }
     }
-    osd_channellist_show_epg(osd, osd->channellist_selected_channel);    
+    osd_channellist_show_epg(osd, osd->channellist_selected_channel);
   }
   //fprintf(stderr, "\n"); 
 }
@@ -1017,16 +1017,16 @@ int osd_process_key(struct osd_t* osd, int c) {
   if (osd->osd_state == OSD_CHANNELLIST) {
     switch (c) {
       case 'k':
+	fprintf(stderr,"links\n");
 	osd_clear(osd);
         osd->channellist_start_channel = channels_getfirst();
         osd_channellist_display(osd,1);
-	fprintf(stderr,"links\n");
 	break;
       case 'l':
+	fprintf(stderr,"rechts\n");
 	osd_clear(osd);
 	osd->channellist_start_channel = channels_getfirst();
 	osd_channellist_display(osd,2);
-	fprintf(stderr,"rechts\n");
 	break;
       case 'd':
         if (osd_channellist_selected_position(osd) == CHANNELLIST_BOTTOM) {
