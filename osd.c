@@ -835,7 +835,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
     }
 	  
     snprintf(str, sizeof(str), "TV"); 
-    (void)graphics_resource_render_text_ext(osd->img, x - 10, y, width, height,
+    (void)graphics_resource_render_text_ext(osd->img, x, y - 10, width, height,
                                             COLOR_TITLE_TEXT,         /* fg */
                                             bg_color,      /* bg */
                                             str, strlen(str), 40);
