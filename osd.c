@@ -835,7 +835,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
     }
 	  
     snprintf(str, sizeof(str), "TV"); 
-    (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
+    (void)graphics_resource_render_text_ext(osd->img, x - 10, y, width, height,
                                             COLOR_TITLE_TEXT,         /* fg */
                                             bg_color,      /* bg */
                                             str, strlen(str), 40);
@@ -865,8 +865,9 @@ void osd_channellist_display_channels(struct osd_t* osd)
           localtime_r((time_t*)&event->start, &start_time);
           localtime_r((time_t*)&event->stop, &stop_time);
         //if (event->title) {
-          iso_text2 = malloc(strlen(event->title)+3);
-          utf8decode(event->title, iso_text2);
+          iso_text2 = malloc(strlen(event->title)+1);
+          //utf8decode(event->title, iso_text2);
+	  iso_text2 = event->title;
 	  iso_text1 = "-";
         }
         else {
