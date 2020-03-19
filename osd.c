@@ -51,10 +51,12 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #define CHANNELLIST_BOTTOM 2
 #define CHANNELLIST_TEXTSIZE 30
 #define COLOR_TEXT GRAPHICS_RGBA32(0xff,0xff,0xff,0xff)
-#define COLOR_SELECTED_TEXT GRAPHICS_RGBA32(0x00,0xff,0xff,0xff)
+//#define COLOR_SELECTED_TEXT GRAPHICS_RGBA32(0x00,0xff,0xff,0xff)
+#define COLOR_SELECTED_TEXT GRAPHICS_RGBA32(0,0,0,0x80)
 #define COLOR_BACKGROUND GRAPHICS_RGBA32(0,0,0,0x80)
-#define COLOR_SELECTED_BACKGROUND GRAPHICS_RGBA32(0xff,0,0,0x80)
-#define CHANNELLIST_NUM_CHANNELS 20
+#define COLOR_SELECTED_BACKGROUND GRAPHICS_RGBA32(0xff,0xff,0xff,0xff)
+//#define COLOR_SELECTED_BACKGROUND GRAPHICS_RGBA32(0xff,0,0,0x80)
+#define CHANNELLIST_NUM_CHANNELS 18
 #define CHANNELLIST_UP 1
 #define CHANNELLIST_DOWN 2
 
@@ -823,7 +825,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
     num_display = num_channels > CHANNELLIST_NUM_CHANNELS ? CHANNELLIST_NUM_CHANNELS : num_channels;
     id = osd->channellist_start_channel;
 
-    for (i = 0; i < num_channels; i++) {
+    for (i = 0; i < num_display; i++) {
       if (id == osd->channellist_selected_channel) {
         a = channels_gettag(id);
  	break;
