@@ -184,7 +184,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
                                      text, line_length, text_size);
       if (s!=0) return s;
    }
-   fprintf(stderr,"height: %u\n",height)
+   fprintf(stderr,"height: %u\n",height);
    if (text[line_length]) {
      return render_paragraph(img, text + line_length+1, text_size, x_offset, y_offset + height,img_w);
    } else {
