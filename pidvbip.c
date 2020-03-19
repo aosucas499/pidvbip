@@ -758,7 +758,7 @@ int main(int argc, char* argv[])
               }                
               
               osd.channellist_selected_pos = 0;
-              osd_channellist_display(&osd);
+              osd_channellist_display(&osd,0);
             }                  
             //channels_dump();
             //channellist_offset=0;
