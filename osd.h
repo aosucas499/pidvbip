@@ -69,7 +69,7 @@ void osd_show_audio_menu(struct osd_t* osd, struct codecs_t* codecs, int audio_s
 void osd_blank_video(struct osd_t* osd, int on_off);
 void osd_update(struct osd_t* osd, int channel_id);
 int osd_process_key(struct osd_t* osd, int c);
-void osd_channellist_display(struct osd_t* osd);
+void osd_channellist_display(struct osd_t* osd, int lor);
 
 extern int *channellist_offset;
 
