@@ -57,7 +57,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #define COLOR_SELECTED_BACKGROUND GRAPHICS_RGBA32(0xff,0xff,0xff,0xff)
 //#define COLOR_SELECTED_BACKGROUND GRAPHICS_RGBA32(0xff,0,0,0x80)
 #define COLOR_TITLE_TEXT GRAPHICS_RGBA32(0x00,0xff,0xff,0xff)
-#define CHANNELLIST_NUM_CHANNELS 18
+#define CHANNELLIST_NUM_CHANNELS 12
 #define CHANNELLIST_UP 1
 #define CHANNELLIST_DOWN 2
 
@@ -605,7 +605,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   struct event_t* event = event_copy(osd->event, server);
   struct event_t* nextEvent = event_copy(osd->nextEvent, server);
 
-  osd_draw_window(osd, 800 + OSD_XMARGIN, OSD_YMARGIN, SCREENWIDTH - 800 - OSD_XMARGIN - 16, SCREENHEIGHT - 2 * OSD_YMARGIN);
+  osd_draw_window(osd, 800 + OSD_XMARGIN, OSD_YMARGIN, SCREENWIDTH - 800 - OSD_XMARGIN - 16, SCREENHEIGHT - 2 * OSD_YMARGIN - 100);
 
   if (event == NULL)
     return;
@@ -924,7 +924,7 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
 void osd_channellist_display(struct osd_t* osd, int lor)
 {   
   uint32_t width = 780;
-  uint32_t height = 720 - 2 * OSD_YMARGIN;
+  uint32_t height = 540 - 2 * OSD_YMARGIN;
   
   pthread_mutex_lock(&osd->osd_mutex);
   osd_draw_window(osd, OSD_XMARGIN, OSD_YMARGIN, width, 60);
