@@ -804,7 +804,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
   char str[60];
   uint32_t width = 740;
   uint32_t height = 38;
-  uint32_t x = OSD_XMARGIN + 20 + 80;
+  uint32_t x = OSD_XMARGIN + 20;
   uint32_t y = OSD_YMARGIN + 20;
   uint32_t color;
   uint32_t bg_color;
@@ -877,7 +877,7 @@ void osd_channellist_display_channels(struct osd_t* osd)
       snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
       iso_text = malloc(strlen(str) + 1);
       utf8decode(str, iso_text);
-      (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
+      (void)graphics_resource_render_text_ext(osd->img, x, y + 80, width, height,
                                             color,         /* fg */
                                             bg_color,      /* bg */
                                             iso_text, strlen(iso_text), 30);
@@ -914,7 +914,7 @@ void osd_channellist_display(struct osd_t* osd)
   
   pthread_mutex_lock(&osd->osd_mutex);
   osd_draw_window(osd, OSD_XMARGIN, OSD_YMARGIN, width, 60);
-  osd_draw_window(osd, OSD_XMARGIN + 80, OSD_YMARGIN, width, height);
+  osd_draw_window(osd, OSD_XMARGIN, OSD_YMARGIN + 80, width, height);
   
   osd_channellist_display_channels(osd);
   
