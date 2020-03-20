@@ -623,37 +623,44 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   if (event == NULL)
     return;
 
-  /* Start/stop time - current event */
-  localtime_r((time_t*)&event->start, &start_time);
-  localtime_r((time_t*)&event->stop, &stop_time);
-  if (event->title) {
-    iso_text = malloc(strlen(event->title)+1);
-    utf8decode(event->title, iso_text);
-  }
-  else {
-    iso_text = malloc(1);
-    iso_text = "";
+  if (event)
+    /* Start/stop time - current event */
+    localtime_r((time_t*)&event->start, &start_time);
+    localtime_r((time_t*)&event->stop, &stop_time);
+    if (event->title) {
+      iso_text = malloc(strlen(event->title)+1);
+      utf8decode(event->title, iso_text);
+    } else {
+      iso_text = malloc(1);
+      iso_text = "";
+    }
   }
   snprintf(str, sizeof(str),"%s", iso_text);
   (void)graphics_resource_render_text_ext(osd->img, 10 + OSD_XMARGIN + 800, OSD_YMARGIN + 20, SCREENWIDTH - 800 - 2 * OSD_XMARGIN, 50,
                                      GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
                                      GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
                                      str, strlen(str), 28);
-  free(iso_text);
-  
-  if (event->description) {
-    char* iso_text = malloc(strlen(event->description)+1);
-    utf8decode(event->description,iso_text);
-    render_paragraph(osd->img,iso_text,24,800 + OSD_XMARGIN + 10,OSD_YMARGIN + 70, SCREENWIDTH - 800 - 2 * OSD_XMARGIN);
+  if (event){
+    if (event->description) {
+      char* iso_text = malloc(strlen(event->description)+1);
+      utf8decode(event->description,iso_text);
+      render_paragraph(osd->img,iso_text,24,800 + OSD_XMARGIN + 10,OSD_YMARGIN + 70, SCREENWIDTH - 800 - 2 * OSD_XMARGIN);
+    }
+  }
+
+  if (iso_text != ""){
     free(iso_text);
   }
 
-  event_free(event);
+  if (event){
+    event_free(event);
+  }
   return;
 	
   if (nextEvent == NULL)
     return;
 
+  if (nextevent){
   // Start/stop time - next event
   localtime_r((time_t*)&nextEvent->start, &start_time);
   localtime_r((time_t*)&nextEvent->stop, &stop_time);
@@ -667,11 +674,13 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
                                      GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
                                      GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
                                      str, strlen(str), 30);
-  free(iso_text);
+  if (iso_text != ""){
+    free(iso_text);
+  }
   
-
-  event_free(event);
-  event_free(nextEvent);
+  if (netx_Event){
+    event_free(nextEvent);
+  }
   
 }
 
@@ -926,7 +935,7 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
       id = channels_getnext(id);   
     }
     }
-    //osd_channellist_show_epg(osd, osd->channellist_selected_channel);
+    osd_channellist_show_epg(osd, osd->channellist_selected_channel);
   }
   //fprintf(stderr, "\n"); 
 }
