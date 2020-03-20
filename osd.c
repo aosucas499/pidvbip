@@ -623,7 +623,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
   if (event == NULL)
     return;
 
-  if (event)
+  if (event){
     /* Start/stop time - current event */
     localtime_r((time_t*)&event->start, &start_time);
     localtime_r((time_t*)&event->stop, &stop_time);
