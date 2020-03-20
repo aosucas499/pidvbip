@@ -661,19 +661,20 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
     return;
 
   if (nextevent){
-  // Start/stop time - next event
-  localtime_r((time_t*)&nextEvent->start, &start_time);
-  localtime_r((time_t*)&nextEvent->stop, &stop_time);
-  if (nextEvent->title) {
-    iso_text = malloc(strlen(nextEvent->title)+1);
-    utf8decode(nextEvent->title, iso_text);
+    // Start/stop time - next event
+    localtime_r((time_t*)&nextEvent->start, &start_time);
+    localtime_r((time_t*)&nextEvent->stop, &stop_time);
+    if (nextEvent->title) {
+      iso_text = malloc(strlen(nextEvent->title)+1);
+      utf8decode(nextEvent->title, iso_text);
+    }
+    
+    snprintf(str, sizeof(str),"%02d:%02d - %02d:%02d %s",start_time.tm_hour,start_time.tm_min,stop_time.tm_hour,stop_time.tm_min, iso_text);
+    (void)graphics_resource_render_text_ext(osd->img, 800 + OSD_XMARGIN + 50, OSD_YMARGIN + 300, SCREENWIDTH - 800 - OSD_XMARGIN - 40, 50,
+                                       GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
+                                       GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
+                                       str, strlen(str), 30);
   }
-  
-  snprintf(str, sizeof(str),"%02d:%02d - %02d:%02d %s",start_time.tm_hour,start_time.tm_min,stop_time.tm_hour,stop_time.tm_min, iso_text);
-  (void)graphics_resource_render_text_ext(osd->img, 800 + OSD_XMARGIN + 50, OSD_YMARGIN + 300, SCREENWIDTH - 800 - OSD_XMARGIN - 40, 50,
-                                     GRAPHICS_RGBA32(0xff,0xff,0xff,0xff), /* fg */
-                                     GRAPHICS_RGBA32(0,0,0,0x80), /* bg */
-                                     str, strlen(str), 30);
   if (iso_text != ""){
     free(iso_text);
   }
