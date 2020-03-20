@@ -33,7 +33,7 @@ Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
 #include "utils.h"
 
 #define SCREENWIDTH 1280
-#define SCREENHEIGHT 800
+#define SCREENHEIGHT 720
 
 static void* vcodec_omx_thread(struct codec_init_args_t* args)
 {
