@@ -425,7 +425,6 @@ void* htsp_receiver_thread(struct codecs_t* codecs)
                 first_video_muxpkt = 0;
                 fprintf(stderr,"Received first video_muxpkt: %.3fs\n",(get_time()-omxpipe.channel_switch_starttime)/1000.0);
               }
-	      fprintf(stderr,"sizeof(packet):%u\n",sizeof(*packet));
               packet = malloc(sizeof(*packet));
               packet->buf = msg.msg;
               htsp_get_int(&msg,"frametype",&packet->frametype);
