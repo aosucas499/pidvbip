@@ -679,7 +679,7 @@ void osd_channellist_show_epg(struct osd_t* osd, int channel_id)
     free(iso_text);
   }
   
-  if (netx_Event){
+  if (next_Event){
     event_free(nextEvent);
   }
   
