@@ -156,13 +156,13 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        line_length = 0;
        do {
          line_length = line_length+10;
-         s = graphics_resource_text_dimensions_ext(img, text, text_length, &width, &height, text_size);
+         s = graphics_resource_text_dimensions_ext(img, text, line_length, &width, &height, text_size);
          if (s != 0) return s;
        } while (width < img_w);
 
        do {
          line_length--;
-         s = graphics_resource_text_dimensions_ext(img, text, text_length, &width, &height, text_size);
+         s = graphics_resource_text_dimensions_ext(img, text, line_length, &width, &height, text_size);
          if (s != 0) return s;
        } while (width > img_w);
 	     
@@ -710,7 +710,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   struct event_t* event = event_copy(osd->event, server);
   struct event_t* nextEvent = event_copy(osd->nextEvent, server);
 
-  if (event){	
+  if (event){
     /* Start/stop time - current event */
     localtime_r((time_t*)&event->start, &start_time);
     localtime_r((time_t*)&event->stop, &stop_time);
