@@ -127,7 +127,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
    if ((!text) || ((text_length=strlen(text))==0) || y_offset >= 598)
       return 0;
 
-   //fprintf(stderr,"y_offset: %u\n",y_offset);
+   fprintf(stderr,"y_offset: %u\n",y_offset);
 	
    //fprintf(stderr,"render_paragraph(\"%s\",%d)\n",text,text_length);
 
@@ -151,7 +151,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        if (s != 0) return s;
      }
 
-     if ((space == NULL) || (width > img_w)) {
+     if ((space == NULL) && (width > img_w)) {
        /* No spaces, within img_w. Just go through character by character */
        line_length = 0;
        do {
