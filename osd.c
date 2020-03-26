@@ -124,11 +124,14 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
    const char *split = text;
    int32_t s=0;
 
+    if (y_offset == 88)
+      fprintf(stderr,"text:\n %s\n",text);
+
    if ((!text) || ((text_length=strlen(text))==0) || y_offset >= 598)
       return 0;
 
    fprintf(stderr,"y_offset: %u\n",y_offset);
-	
+   	
    //fprintf(stderr,"render_paragraph(\"%s\",%d)\n",text,text_length);
 
    if (text_length > 100){
