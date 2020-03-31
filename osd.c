@@ -158,18 +158,18 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        /* No spaces, within img_w. Just go through character by character */
        line_length = 0;
        do {
-         line_length = line_length+1;
+         line_length = line_length+10;
          s = graphics_resource_text_dimensions_ext(img, text, line_length, &width, &height, text_size);
          if (s != 0) return s;
        } while (width < img_w);
 
-       /*do {
+       do {
          line_length--;
          s = graphics_resource_text_dimensions_ext(img, text, line_length, &width, &height, text_size);
          if (s != 0) return s;
        } while (width > img_w);
-	 */    
-       line_length--;
+    
+       //line_length--;
      } else {
        /* We have at least one space, so can split line on a space */
        width = 0;
@@ -188,10 +188,10 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
    fprintf(stderr,"height: %u\n",height);
 	
    if (line_length) {
-     //int i;
-     //fprintf(stderr,"Rendering: ");
-     //for (i=0;i<line_length;i++) { fprintf(stderr,"%c",text[i]); }
-     //fprintf(stderr,"\n");
+     int i;
+     printf(stderr,"Rendering: ");
+     for (i=0;i<line_length;i++) { fprintf(stderr,"%c",text[i]); }
+     fprintf(stderr,"\n");
 
      s = graphics_resource_render_text_ext(img, x_offset, y_offset,
                                      GRAPHICS_RESOURCE_WIDTH,
