@@ -141,7 +141,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
      if (s != 0) return s;
    }
 	   
-   if (width <= img_w) {
+   if (width <= img_w && height < 50) {
      /* We can display the whole line */
      line_length = text_length;
    } else {
