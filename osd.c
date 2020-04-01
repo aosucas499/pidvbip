@@ -161,7 +161,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
          line_length = line_length+10;
          s = graphics_resource_text_dimensions_ext(img, text, line_length, &width, &height, text_size);
          if (s != 0) return s;
-       } while (width < img_w);
+       } while (width < img_w && height < 50);
 
        do {
          line_length--;
