@@ -189,8 +189,12 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        
        space = index(text,'\n');
 	     
-       if ((space) && (line_length > (space-text))) {
-         line_length = space-text;
+       if (space) {
+	 fprintf(stderr,"line_length1: %u\n",line_length);
+	 fprintf(stderr,"line_length2: %u\n",space-text);
+	 if (line_length > (space-text)) {
+           line_length = space-text;
+	 }
        }
 	     
      }
