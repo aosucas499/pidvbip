@@ -146,6 +146,17 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
      /* We can display the whole line */
      fprintf(stderr,"height2: %u\n",height);
      line_length = text_length;
+	
+     if (height > 30){
+        space = index(text,'\n');
+        if (space) {
+ 	  fprintf(stderr,"line_length1: %u\n",line_length);
+	  fprintf(stderr,"line_length2: %u\n",space-text);
+	  if (line_length > (space-text)) {
+            line_length = space-text;
+	  }
+       }
+     }
    } else {
      //fprintf(stderr,"width=%d, img_w=%d, looking for next space\n",width,img_w);
 	   
@@ -187,8 +198,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
          if ((width < img_w) && (height <= 30)) { line_length = space - text; }
        }
        
-	fprintf(stderr,"blablabla\n");
-	space = index(text,'\n');
+       space = index(text,'\n');
 
        if (space) {
 	 fprintf(stderr,"line_length1: %u\n",line_length);
