@@ -186,9 +186,16 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
 	       
          if (width < img_w) { line_length = space - text; }
        }
+	while (width < img_w) {
+         space = index(space+1,' ');
+         s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
+         if (s != 0) return s;
+
+         if (width < img_w) { line_length = space - text; }
+       }
        
 	fprintf(stderr,"blablabla\n");
-	space = index(space+1,'\n');
+	/*space = index(space+1,'\n');
 
        if (space) {
 	 fprintf(stderr,"line_length1: %u\n",line_length);
@@ -197,7 +204,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
            line_length = space-text;
 	 }
        }
-	     
+	  */   
      }
    }
 	
