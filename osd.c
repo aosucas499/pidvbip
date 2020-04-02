@@ -201,7 +201,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
          if (width < img_w){
 		 line_length2 = space - text;
 		 fprintf(stderr,"space-text: %u\n",line_length2);
-		 if (line_length2) < 1800) {
+		 if (line_length2 < 1800) {
 			 line_length = line_length2;
 		 }
 	 }
