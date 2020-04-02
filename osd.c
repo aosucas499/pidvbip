@@ -188,7 +188,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        }
        
 	fprintf(stderr,"blablabla\n");
-	space = index(space+1,'\n');
+	space = index(text,'\n');
 
        if (space) {
 	 fprintf(stderr,"line_length1: %u\n",line_length);
