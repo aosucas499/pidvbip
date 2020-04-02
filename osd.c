@@ -138,11 +138,13 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
      width = 9999;
    } else {
      s = graphics_resource_text_dimensions_ext(img, text, text_length, &width, &height, text_size);
+     fprintf(stderr,"height1: %u\n",height)
      if (s != 0) return s;
    }
 	   
    if (width <= img_w && height < 50) {
      /* We can display the whole line */
+     fprintf(stderr,"height2: %u\n",height)
      line_length = text_length;
    } else {
      //fprintf(stderr,"width=%d, img_w=%d, looking for next space\n",width,img_w);
@@ -151,6 +153,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
 
      if (space) {
        s = graphics_resource_text_dimensions_ext(img, text, space-text, &width, &height, text_size);
+       fprintf(stderr,"height3: %u\n",height)
        if (s != 0) return s;
      }
 
@@ -172,6 +175,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        //line_length--;
      } else {
        /* We have at least one space, so can split line on a space */
+       fprintf(stderr,"height4: %u\n",height)
        width = 0;
        line_length = space - text;
 
@@ -180,12 +184,12 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
          s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
          if (s != 0) return s;
 
-         if (width < img_w) { line_length = space - text; }
+         if (width < img_w && height < 50) { line_length = space - text; }
        }
      }
    }
 	
-   fprintf(stderr,"height: %u\n",height);
+   fprintf(stderr,"height5: %u\n",height);
 	
    if (line_length) {
      int i;
