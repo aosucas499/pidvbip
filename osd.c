@@ -132,7 +132,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
 
    fprintf(stderr,"y_offset: %u\n",y_offset);
    	
-   fprintf(stderr,"render_paragraph(\"%s\",%d)\n",text,text_length);
+   //fprintf(stderr,"render_paragraph(\"%s\",%d)\n",text,text_length);
 
    if (text_length > 100){
      width = 9999;
