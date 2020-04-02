@@ -190,7 +190,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        space = index(space+1,'\n');
 	     
        if (space) {
-	       fprintf(stderr,"space: %s\n",space)
+	       fprintf(stderr,"space: %s\n",space);
          s = graphics_resource_text_dimensions_ext(img, text, space-text, &width, &height, text_size);
          if (s != 0) return s;
          fprintf(stderr,"height99: %u\n",height);
