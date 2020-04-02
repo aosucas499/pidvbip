@@ -130,9 +130,9 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
    if ((!text) || ((text_length=strlen(text))==0) || y_offset >= 598)
       return 0;
 
-   //fprintf(stderr,"y_offset: %u\n",y_offset);
+   fprintf(stderr,"y_offset: %u\n",y_offset);
    	
-   //fprintf(stderr,"render_paragraph(\"%s\",%d)\n",text,text_length);
+   fprintf(stderr,"render_paragraph(\"%s\",%d)\n",text,text_length);
 
    if (text_length > 100){
      width = 9999;
@@ -142,15 +142,20 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
      if (s != 0) return s;
    }
 	   
-   if (width <= img_w && height < 50) {
+   const char* space = index(split,'\n');	
+	
+   if (width <= img_w) {
      /* We can display the whole line */
      fprintf(stderr,"height2: %u\n",height);
      line_length = text_length;
+   } else if (space) {
+     fprintf(stderr,"height99: %u\n",height);
+     line_length = space-text;
    } else {
      //fprintf(stderr,"width=%d, img_w=%d, looking for next space\n",width,img_w);
-
-     const char* space = index(split,' ');
-
+	   
+     space = index(split,' ');
+	   
      if (space) {
        s = graphics_resource_text_dimensions_ext(img, text, space-text, &width, &height, text_size);
        fprintf(stderr,"height3: %u\n",height);
@@ -186,12 +191,12 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
 	       
          if (width < img_w && height < 50) { line_length = space - text; }
        }
-	 while (height > 30) {
-	   space = index(space-1,' ');
-           s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
-           if (s != 0) return s;
-	 }
-         if (width < img_w && height < 50) { line_length = space - text; }
+       while (height > 30) {
+	 space = index(space-1,' ');
+         s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
+         if (s != 0) return s;
+       }
+       if (width < img_w && height < 50) { line_length = space - text; }
      }
    }
 	
