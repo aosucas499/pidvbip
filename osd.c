@@ -200,7 +200,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
          if ((width < img_w) && (height <= 30)) { line_length = space - text; }
        }
        
-       if (height > 30) {
+       if ((y_offset+height) >= 598) {
          space = index(text,'\n');
 
          if (space) {
