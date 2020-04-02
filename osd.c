@@ -149,6 +149,8 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
      fprintf(stderr,"height2: %u\n",height);
      line_length = text_length;
    } else if (space) {
+     s = graphics_resource_text_dimensions_ext(img, text, space-text, &width, &height, text_size);
+     if (s != 0) return s;
      fprintf(stderr,"height99: %u\n",height);
      line_length = space-text;
    } else {
