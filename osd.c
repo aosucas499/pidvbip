@@ -153,7 +153,9 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
      if (s != 0) return s;
      fprintf(stderr,"height99: %u\n",height);
      line_length = space-text;
-   } else {
+   }
+   
+   if (width > img_w) {
      //fprintf(stderr,"width=%d, img_w=%d, looking for next space\n",width,img_w);
 	   
      space = index(split,' ');
