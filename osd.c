@@ -120,6 +120,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
 {
    uint32_t text_length;
    uint32_t line_length;
+   uint32_t line_length2;
    uint32_t width=0, height=0;
    const char *split = text;
    int32_t s=0;
@@ -150,8 +151,6 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
      if (height > 30){
         const char* space = index(text,'\n');
         if (space) {
- 	  fprintf(stderr,"line_length1: %u\n",line_length);
-	  fprintf(stderr,"line_length2: %u\n",space-text);
 	  if (line_length > (space-text)) {
 	    line_length = space-text;
 	    s = graphics_resource_text_dimensions_ext(img, text, line_length, &width, &height, text_size);
@@ -166,7 +165,6 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
 	   
      if (space) {
        s = graphics_resource_text_dimensions_ext(img, text, space-text, &width, &height, text_size);
-       fprintf(stderr,"height3: %u\n",height);
        if (s != 0) return s;
      }
 
@@ -188,36 +186,25 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        //line_length--;
      } else {
        /* We have at least one space, so can split line on a space */
-       fprintf(stderr,"height4: %u\n",height);
        width = 0;
        line_length = space - text;
-
-	    uint32_t line_length2;
-	     
+    
        while ((width < img_w) && (height <= 30) && (line_length < 1800)) {
          space = index(space+1,' ');
          s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
          if (s != 0) return s;
-         if (width < img_w){
-		 line_length2 = space - text;
-		 fprintf(stderr,"space-text: %u\n",line_length2);
-		 if (line_length2 < 1800) {
-			 line_length = line_length2;
-		 }
+         if ((width < img_w) && (height <= 30)) {
+           line_length2 = space - text;
+	   if (line_length2 < 1800) {
+	     line_length = line_length2;
+	   }
 	 }
- 	 fprintf(stderr,"line_length: %u\n",line_length);
-	 fprintf(stderr,"width: %u\n",width);
-	 fprintf(stderr,"height: %u\n",height);
        }
-       
-	fprintf(stderr,"test5\n");
-	     
+       	     
        if ((height > 30) || (line_length > 1800)) {
          space = index(text,'\n');
 
          if (space) {
-  	   fprintf(stderr,"line_length1: %u\n",line_length);
-	   fprintf(stderr,"line_length2: %u\n",space-text);
 	   if (line_length > (space-text)) {
              line_length = space-text;
 	     s = graphics_resource_text_dimensions_ext(img, text, line_length, &width, &height, text_size);
@@ -230,9 +217,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
 	  
      }
    }
-	
-   fprintf(stderr,"height5: %u\n",height);
-	
+		
    if (line_length) {
      /*int i;
      printf(stderr,"Rendering: ");
