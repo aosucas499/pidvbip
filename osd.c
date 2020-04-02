@@ -198,6 +198,8 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
          if (s != 0) return s;
          if (width < img_w) { line_length = space - text; }
  	 fprintf(stderr,"line_length: %u\n",line_length);
+	 fprintf(stderr,"width: %u\n",width);
+	 fprintf(stderr,"height: %u\n",height);
        }
        
 	fprintf(stderr,"test5\n");
