@@ -148,7 +148,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
      line_length = text_length;
 	
      if (height > 30){
-        space = index(text,'\n');
+        const char* space = index(text,'\n');
         if (space) {
  	  fprintf(stderr,"line_length1: %u\n",line_length);
 	  fprintf(stderr,"line_length2: %u\n",space-text);
