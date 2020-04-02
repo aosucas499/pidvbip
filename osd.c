@@ -184,7 +184,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
          s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
          if (s != 0) return s;
 	       
-         if (width < img_w) { line_length = space - text; }
+         if ((width < img_w) && (height <= 30)) { line_length = space - text; }
        }
        /*
 	fprintf(stderr,"blablabla\n");
