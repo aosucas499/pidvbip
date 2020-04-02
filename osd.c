@@ -192,14 +192,10 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        width = 0;
        line_length = space - text;
 
-       while (width < img_w) {
-	 fprintf(stderr,"test1\n");
-         space = strchr(space+1,' ');
-	 fprintf(stderr,"test2\n");
+       while ((width < img_w) && (space-text) > 2) {
+         space = index(space+1,' ');
          s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
-	 fprintf(stderr,"test3\n");
          if (s != 0) return s;
-	 fprintf(stderr,"test4\n");
          if (width < img_w) { line_length = space - text; }
        }
        
