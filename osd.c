@@ -140,25 +140,16 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
      s = graphics_resource_text_dimensions_ext(img, text, text_length, &width, &height, text_size);
      fprintf(stderr,"height1: %u\n",height);
      if (s != 0) return s;
-   }
-	   
-   const char* space = index(split,'\n');	
+   }	
 	
    if (width <= img_w) {
      /* We can display the whole line */
      fprintf(stderr,"height2: %u\n",height);
      line_length = text_length;
-   } else if (space) {
-     s = graphics_resource_text_dimensions_ext(img, text, space-text, &width, &height, text_size);
-     if (s != 0) return s;
-     fprintf(stderr,"height99: %u\n",height);
-     line_length = space-text;
-   }
-   
-   if (width > img_w) {
+   } else {
      //fprintf(stderr,"width=%d, img_w=%d, looking for next space\n",width,img_w);
 	   
-     space = index(split,' ');
+     const char *space = index(split,' ');
 	   
      if (space) {
        s = graphics_resource_text_dimensions_ext(img, text, space-text, &width, &height, text_size);
@@ -173,7 +164,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
          line_length = line_length+10;
          s = graphics_resource_text_dimensions_ext(img, text, line_length, &width, &height, text_size);
          if (s != 0) return s;
-       } while (width < img_w && height < 50);
+       } while (width < img_w);
 
        do {
          line_length--;
@@ -188,19 +179,23 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        width = 0;
        line_length = space - text;
 
-       while (width < img_w && height < 50) {
+       while (width < img_w) {
          space = index(space+1,' ');
          s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
          if (s != 0) return s;
 	       
-         if (width < img_w && height < 50) { line_length = space - text; }
+         if (width < img_w) { line_length = space - text; }
        }
-       while (height > 30) {
-	 space = index(space-1,' ');
-         s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
+       
+       space = index(space,'\n');
+	     
+       if (space) {
+         s = graphics_resource_text_dimensions_ext(img, text, space-text, &width, &height, text_size);
          if (s != 0) return s;
+         fprintf(stderr,"height99: %u\n",height);
+         line_length = space-text;
        }
-       if (width < img_w && height < 50) { line_length = space - text; }
+	     
      }
    }
 	
