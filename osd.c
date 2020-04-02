@@ -183,9 +183,15 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
          space = index(space+1,' ');
          s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
          if (s != 0) return s;
-
+	       
          if (width < img_w && height < 50) { line_length = space - text; }
        }
+	 while (height > 30) {
+	   space = index(space-1,' ');
+           s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
+           if (s != 0) return s;
+	 }
+         if (width < img_w && height < 50) { line_length = space - text; }
      }
    }
 	
