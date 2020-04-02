@@ -192,11 +192,12 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        width = 0;
        line_length = space - text;
 
-       while ((width < img_w) && (space-text) > 2) {
+       while (width < img_w) {
          space = index(space+1,' ');
          s = graphics_resource_text_dimensions_ext(img, text, space - text, &width, &height, text_size);
          if (s != 0) return s;
          if (width < img_w) { line_length = space - text; }
+ 	 fprintf(stderr,"line_length: %u\n",line_length);
        }
        
 	fprintf(stderr,"test5\n");
@@ -223,11 +224,11 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
    fprintf(stderr,"height5: %u\n",height);
 	
    if (line_length) {
-     int i;
+     /*int i;
      printf(stderr,"Rendering: ");
      for (i=0;i<line_length;i++) { fprintf(stderr,"%c",text[i]); }
      fprintf(stderr,"\n");
-
+*/
      s = graphics_resource_render_text_ext(img, x_offset, y_offset,
                                      GRAPHICS_RESOURCE_WIDTH,
                                      GRAPHICS_RESOURCE_HEIGHT,
