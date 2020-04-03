@@ -125,17 +125,13 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
    const char *split = text;
    int32_t s=0;
 
-   //if (y_offset == 88)
-   //  fprintf(stderr,"text:\n %s\n",text);
-
    if ((!text) || ((text_length=strlen(text))==0) || y_offset >= 598)
       return 0;
 
-   fprintf(stderr,"y_offset: %u\n",y_offset);
-   	
+   //fprintf(stderr,"y_offset: %u\n",y_offset);
    //fprintf(stderr,"render_paragraph(\"%s\",%d)\n",text,text_length);
 
-   if (text_length > 100){
+   if (text_length > 200){
      width = 9999;
    } else {
      s = graphics_resource_text_dimensions_ext(img, text, text_length, &width, &height, text_size);
@@ -166,7 +162,7 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
        if (s != 0) return s;
      }
 
-     if ((space == NULL) && (width > img_w)) {
+     if ((space == NULL) || (width > img_w)) {
        /* No spaces, within img_w. Just go through character by character */
        line_length = 0;
        do {
