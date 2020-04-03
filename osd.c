@@ -900,6 +900,8 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
 	b=a;
         b++;
       }
+    } else {
+      b=a;
     }
   
     snprintf(str, sizeof(str), "%s", tags[b-1]);
