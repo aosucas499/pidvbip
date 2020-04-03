@@ -863,7 +863,6 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
   uint32_t bg_color;
   char* iso_text = NULL; 
   int first_channel;
-  int current_channel;
 
   int server;
   char* iso_text1 = "-";
@@ -871,13 +870,11 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
   struct tm start_time;
   struct tm stop_time;
   int a;
-  int b;
   int j = 0;
   char tags[4][10] = {"SKY","KIKA","TV","SPORT"};
 	
   num_channels = channels_getcount();
   first_channel = channels_getfirst();
-  current_channel = osd->channellist_selected_channel;
   
   if (num_channels > 0) {
     // display max CHANNELLIST_NUM_CHANNELS channels
@@ -888,37 +885,32 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
 	  
     if (lor == 1){
       if (a == 1){
-        b=4;
+        a=4;
       } else {
-	b=a;
-        b--;
+        a--;
       }
     } else if (lor == 2){
       if (a == 4){
-        b=1;
+        a=1;
       } else {
-	b=a;
-        b++;
+        a++;
       }
-    } else {
-      b=a;
     }
   
-    snprintf(str, sizeof(str), "%s", tags[b-1]);
+    snprintf(str, sizeof(str), "%s", tags[a-1]);
     (void)graphics_resource_render_text_ext(osd->img, x, y - 5, width, height+10,
                                             COLOR_TITLE_TEXT,         /* fg */
                                             COLOR_BACKGROUND,      /* bg */
                                             str, strlen(str), 40);
 	  
     for (i = 0; i < num_channels; i++) {
-    if (channels_gettag(id) == b){
+    if (channels_gettag(id) == a){
       j++;
       if (j > num_display){break;};
       if (lor > 0 && j == 1){
-        //osd->channellist_selected_channel = id;
-	current_channel = id;
+        osd->channellist_selected_channel = id;
       }
-      if (id == current_channel) {
+      if (id == osd->channellist_selected_channel) {
         selected = 1;
         osd->channellist_selected_pos = j;
         color = COLOR_SELECTED_TEXT;
@@ -1135,6 +1127,7 @@ int osd_process_key(struct osd_t* osd, int c) {
         osd_channellist_display(osd,0);        
         break;
       case 'i':
+      case 'x':
         osd_clear(osd);
         return c;
         break;
