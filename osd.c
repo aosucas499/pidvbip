@@ -787,7 +787,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     }
   }
     //id = osd->channellist_selected_channel;
-    osd->channellist_selected_channel
+    osd->channellist_selected_channel;
 	  
     channels_geteventid(id, &osd->event, &server);
     channels_getnexteventid(id, &osd->nextEvent, &server);
