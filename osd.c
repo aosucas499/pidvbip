@@ -139,13 +139,11 @@ int32_t render_paragraph(GRAPHICS_RESOURCE_HANDLE img, const char *text, const u
      width = 9999;
    } else {
      s = graphics_resource_text_dimensions_ext(img, text, text_length, &width, &height, text_size);
-     fprintf(stderr,"height1: %u\n",height);
      if (s != 0) return s;
    }	
 	
    if (width <= img_w) {
      /* We can display the whole line */
-     fprintf(stderr,"height2: %u\n",height);
      line_length = text_length;
 	
      if (height > 30){
@@ -877,7 +875,7 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
   struct tm stop_time;
   int a;
   int j = 0;
-  char tags[4][10] = {"TV","SKY","SPORT","KIKA"};
+  char tags[4][10] = {"SKY","KIKA","TV","SPORT"};
 	
   num_channels = channels_getcount();
   first_channel = channels_getfirst();
