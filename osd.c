@@ -720,7 +720,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   char str[60];
   char* iso_text;
   uint32_t x = OSD_XMARGIN + 20;  
-  uint32_t y = OSD_YMARGIN + 20;
+  uint32_t y = OSD_YMARGIN + 20 + 70;
   uint32_t width = 740;
   uint32_t height = 38;  
   int id;
@@ -757,7 +757,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id),iso_text1,iso_text2); 
   iso_text = malloc(strlen(str) + 1);
   utf8decode(str, iso_text);        
-  (void)graphics_resource_render_text_ext(osd->img, x, y+70, width, height,
+  (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
                                           COLOR_TEXT,       /* fg */
                                           COLOR_BACKGROUND, /* bg */
                                           iso_text, strlen(iso_text), 30);
@@ -794,7 +794,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
     iso_text = malloc(strlen(str) + 1);
     utf8decode(str, iso_text);        
-    (void)graphics_resource_render_text_ext(osd->img, x, y+70, width, height,
+    (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
                                             COLOR_SELECTED_TEXT, /* fg */
                                             COLOR_SELECTED_BACKGROUND,    /* bg */
                                             iso_text, strlen(iso_text), 30);
@@ -833,7 +833,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
     iso_text = malloc(strlen(str) + 1);
     utf8decode(str, iso_text);        
-    (void)graphics_resource_render_text_ext(osd->img, x, y+70, width, height,
+    (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
                                             COLOR_SELECTED_TEXT, /* fg */
                                             COLOR_SELECTED_BACKGROUND,    /* bg */
                                             iso_text, strlen(iso_text), 30);  
