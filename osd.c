@@ -791,8 +791,11 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     channels_geteventid(id, &osd->event, &server);
     channels_getnexteventid(id, &osd->nextEvent, &server);
 
-    struct event_t* event = event_copy(osd->event, server);
-    struct event_t* nextEvent = event_copy(osd->nextEvent, server);
+    //struct event_t* event = event_copy(osd->event, server);
+    //struct event_t* nextEvent = event_copy(osd->nextEvent, server);
+	
+    event = event_copy(osd->event, server);
+    nextEvent = event_copy(osd->nextEvent, server);
 
     if (event){
       /* Start/stop time - current event */
