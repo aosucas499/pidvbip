@@ -770,7 +770,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   }
   	
   old_tag = channels_gettag(id);
-  fprintf(stderr,"oldtag: %i\noldid: %i\n",oldtag, id);
+  fprintf(stderr,"oldtag: %i\noldid: %i\n",old_tag, id);
 	
   if (direction == CHANNELLIST_DOWN) {
     osd->channellist_selected_pos++;
