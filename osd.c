@@ -757,7 +757,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id),iso_text1,iso_text2); 
   iso_text = malloc(strlen(str) + 1);
   utf8decode(str, iso_text);        
-  (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
+  (void)graphics_resource_render_text_ext(osd->img, x, y+70, width, height,
                                           COLOR_TEXT,       /* fg */
                                           COLOR_BACKGROUND, /* bg */
                                           iso_text, strlen(iso_text), 30);
@@ -794,7 +794,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
     iso_text = malloc(strlen(str) + 1);
     utf8decode(str, iso_text);        
-    (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
+    (void)graphics_resource_render_text_ext(osd->img, x, y+70, width, height,
                                             COLOR_SELECTED_TEXT, /* fg */
                                             COLOR_SELECTED_BACKGROUND,    /* bg */
                                             iso_text, strlen(iso_text), 30);
@@ -833,7 +833,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
     iso_text = malloc(strlen(str) + 1);
     utf8decode(str, iso_text);        
-    (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
+    (void)graphics_resource_render_text_ext(osd->img, x, y+70, width, height,
                                             COLOR_SELECTED_TEXT, /* fg */
                                             COLOR_SELECTED_BACKGROUND,    /* bg */
                                             iso_text, strlen(iso_text), 30);  
@@ -1072,7 +1072,7 @@ int osd_process_key(struct osd_t* osd, int c) {
           // On bottom
           osd->channellist_selected_channel = channels_getnext(osd->channellist_selected_channel);   
           osd->channellist_start_channel = osd->channellist_selected_channel;
-          osd_channellist_display(osd,0);          
+          osd_channellist_display(osd,0);
         }
         else {
           osd->channellist_prev_selected_channel = osd->channellist_selected_channel;
@@ -1102,7 +1102,7 @@ int osd_process_key(struct osd_t* osd, int c) {
       case 'n':
         // Next page
         id = osd->channellist_start_channel;
-        for (i = 0; i < 12; i++) {
+        for (i = 0; i < 13; i++) {
           id = channels_getnext(id); 
           if (id == channels_getfirst() ) {
             break;
