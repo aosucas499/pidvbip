@@ -720,7 +720,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   char str[60];
   char* iso_text;
   uint32_t x = OSD_XMARGIN + 20;  
-  uint32_t y = OSD_YMARGIN + 20 + 70;
+  uint32_t y = OSD_YMARGIN + 20 + 32;
   uint32_t width = 740;
   uint32_t height = 38;  
   int id;
