@@ -791,14 +791,10 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
 	    fprintf(stderr,"newtag: %i\nnewid: %i\n",channels_gettag(id), id);
     }
   }
-    //id = osd->channellist_selected_channel;
     osd->channellist_selected_channel = id;
 	  
     channels_geteventid(id, &osd->event, &server);
     channels_getnexteventid(id, &osd->nextEvent, &server);
-
-    //struct event_t* event = event_copy(osd->event, server);
-    //struct event_t* nextEvent = event_copy(osd->nextEvent, server);
 	
     event = event_copy(osd->event, server);
     nextEvent = event_copy(osd->nextEvent, server);
@@ -809,7 +805,6 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
       localtime_r((time_t*)&event->stop, &stop_time);
     //if (event->title) {
       iso_text2 = malloc(strlen(event->title)+3);
-      //utf8decode(event->title, iso_text2);
       iso_text2 = event->title;
       iso_text1 = "-";
     } else {
@@ -831,49 +826,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     if (iso_text2 != ""){
       free(iso_text2);
     }
-  /*}
-  else {
-    osd->channellist_selected_pos--;
-    y -= 38;
-    id = osd->channellist_selected_channel;
-	  
-    channels_geteventid(id, &osd->event, &server);
-    channels_getnexteventid(id, &osd->nextEvent, &server);
-
-    struct event_t* event = event_copy(osd->event, server);
-    struct event_t* nextEvent = event_copy(osd->nextEvent, server);
-
-    if (event){
-      // Start/stop time - current event
-      localtime_r((time_t*)&event->start, &start_time);
-      localtime_r((time_t*)&event->stop, &stop_time);
-    //if (event->title) {
-      iso_text2 = malloc(strlen(event->title)+3);
-      //utf8decode(event->title, iso_text2);
-      iso_text2 = event->title;
-      iso_text1 = "-";
-    }
-    else {
-      iso_text2 = malloc(1);
-      iso_text2 = "";
-      iso_text1 = " ";
-    }
-	  
-    //snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2);
-    snprintf(str, sizeof(str), "%s %s %s", channels_getname(id), iso_text1, iso_text2); 
-    iso_text = malloc(strlen(str) + 1);
-    utf8decode(str, iso_text);        
-    (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
-                                            COLOR_SELECTED_TEXT, // fg
-                                            COLOR_SELECTED_BACKGROUND,    // bg
-                                            iso_text, strlen(iso_text), 30);  
-    //graphics_update_displayed_resource(osd->img, x, y, width, 100);                                         
-    free(iso_text);
-    if (iso_text2 != ""){
-      free(iso_text2);
-    }
-  }                                            
-  */
+	
   osd_channellist_show_epg(osd, id);                                                                                      
   graphics_update_displayed_resource(osd->img, 0, 0, SCREENWIDTH,SCREENHEIGHT);                                        
 }
