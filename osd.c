@@ -755,7 +755,8 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     iso_text1 = " ";
   }  
 	
-  snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id),iso_text1,iso_text2); 
+  //snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id),iso_text1,iso_text2); 
+  snprintf(str, sizeof(str), "%s %s %s", channels_getname(id),iso_text1,iso_text2); 
   iso_text = malloc(strlen(str) + 1);
   utf8decode(str, iso_text);        
   (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
@@ -793,7 +794,8 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
       iso_text1 = " ";
     }
 	  
-    snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
+    //snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2);
+    snprintf(str, sizeof(str), "%s %s %s", channels_getname(id), iso_text1, iso_text2); 
     iso_text = malloc(strlen(str) + 1);
     utf8decode(str, iso_text);        
     (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
@@ -833,7 +835,8 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
       iso_text1 = " ";
     }
 	  
-    snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
+    //snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2);
+    snprintf(str, sizeof(str), "%s %s %s", channels_getname(id), iso_text1, iso_text2); 
     iso_text = malloc(strlen(str) + 1);
     utf8decode(str, iso_text);        
     (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
@@ -944,7 +947,8 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
           iso_text2 = "";
 	  iso_text1 = " ";
         }
-      snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2); 
+      //snprintf(str, sizeof(str), "%d %s %s %s", channels_getlcn(id), channels_getname(id), iso_text1, iso_text2);
+      snprintf(str, sizeof(str), "%s %s %s", channels_getname(id), iso_text1, iso_text2);
       iso_text = malloc(strlen(str) + 1);
       utf8decode(str, iso_text);
       (void)graphics_resource_render_text_ext(osd->img, x, y + 70, width, height,
