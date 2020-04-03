@@ -996,11 +996,11 @@ void osd_channellist_display(struct osd_t* osd, int lor)
  */
 int osd_channellist_selected_position(struct osd_t* osd)
 {
-  if (osd->channellist_selected_pos == CHANNELLIST_NUM_CHANNELS - 1 ||
+  if (osd->channellist_selected_pos == CHANNELLIST_NUM_CHANNELS ||
       osd->channellist_selected_channel == channels_getlast() ) {
     return CHANNELLIST_BOTTOM;
   } 
-  else if (osd->channellist_selected_pos == 0) {
+  else if (osd->channellist_selected_pos == 1) {
     return CHANNELLIST_TOP;
   }
   return CHANNELLIST_MIDDLE;
@@ -1102,7 +1102,7 @@ int osd_process_key(struct osd_t* osd, int c) {
       case 'n':
         // Next page
         id = osd->channellist_start_channel;
-        for (i = 0; i < 13; i++) {
+        for (i = 0; i < CHANNELLIST_NUM_CHANNELS; i++) {
           id = channels_getnext(id); 
           if (id == channels_getfirst() ) {
             break;
