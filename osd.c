@@ -770,20 +770,25 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   }
   	
   old_tag = channels_gettag(id);
+  fprintf(stderr,"oldtag: %i\noldid: %u\",oldtag, id);
 	
   if (direction == CHANNELLIST_DOWN) {
     osd->channellist_selected_pos++;
     y += 38;
     id = channels_getnext(id);
+	  fprintf(stderr,"newtag: %i\nnewid: %u\",channels_gettag(id), id);
     while (old_tag != channels_gettag(id)){
       id = channels_getnext(id);
+	    fprintf(stderr,"newtag: %i\nnewid: %u\",channels_gettag(id), id);
     }
   } else {
     osd->channellist_selected_pos--;
     y -= 38;
     id = channels_getprev(id);
+	  fprintf(stderr,"newtag: %i\nnewid: %u\",channels_gettag(id), id);
     while (old_tag != channels_gettag(id)){
       id = channels_getprev(id);
+	    fprintf(stderr,"newtag: %i\nnewid: %u\",channels_gettag(id), id);
     }
   }
     //id = osd->channellist_selected_channel;
