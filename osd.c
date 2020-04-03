@@ -746,7 +746,8 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     localtime_r((time_t*)&event->stop, &stop_time);
     //if (event->title) {
     iso_text2 = malloc(strlen(event->title)+3);
-    utf8decode(event->title, iso_text2);
+    //utf8decode(event->title, iso_text2);
+    iso_text2 = event->title;
     iso_text1 = "-";
   } else {
     iso_text2 = malloc(1);
@@ -783,7 +784,8 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
       localtime_r((time_t*)&event->stop, &stop_time);
     //if (event->title) {
       iso_text2 = malloc(strlen(event->title)+3);
-      utf8decode(event->title, iso_text2);
+      //utf8decode(event->title, iso_text2);
+      iso_text2 = event->title;
       iso_text1 = "-";
     } else {
       iso_text2 = malloc(1);
@@ -821,7 +823,8 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
       localtime_r((time_t*)&event->stop, &stop_time);
     //if (event->title) {
       iso_text2 = malloc(strlen(event->title)+3);
-      utf8decode(event->title, iso_text2);
+      //utf8decode(event->title, iso_text2);
+      iso_text2 = event->title;
       iso_text1 = "-";
     }
     else {
