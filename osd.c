@@ -724,6 +724,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   uint32_t width = 740;
   uint32_t height = 38;  
   int id;
+  int old_tag;
 
   int server;
   char* iso_text2 = NULL; 
@@ -732,7 +733,8 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   struct tm stop_time;
   
   y += osd->channellist_selected_pos * 38;  // old selected position
-  id = osd->channellist_prev_selected_channel;
+  //id = osd->channellist_prev_selected_channel;
+  id = osd->channellist_selected_channel;
 	
   channels_geteventid(id, &osd->event, &server);
   channels_getnexteventid(id, &osd->nextEvent, &server);
@@ -746,7 +748,6 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     localtime_r((time_t*)&event->stop, &stop_time);
     //if (event->title) {
     iso_text2 = malloc(strlen(event->title)+3);
-    //utf8decode(event->title, iso_text2);
     iso_text2 = event->title;
     iso_text1 = "-";
   } else {
@@ -767,11 +768,25 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
   if (iso_text2 != ""){
     free(iso_text2);
   }
-  
+  	
+  old_tag = channels_gettag(id);
+	
   if (direction == CHANNELLIST_DOWN) {
     osd->channellist_selected_pos++;
     y += 38;
-    id = osd->channellist_selected_channel;
+    id = channels_getnext(id);
+    while (old_tag != channels_gettag(id)){
+      id = channels_getnext(id);
+    }
+  } else {
+    osd->channellist_selected_pos--;
+    y -= 38;
+    id = channels_getprev(id);
+    while (old_tag != channels_gettag(id)){
+      id = channels_getprev(id);
+    }
+  }
+    //id = osd->channellist_selected_channel;
 	  
     channels_geteventid(id, &osd->event, &server);
     channels_getnexteventid(id, &osd->nextEvent, &server);
@@ -807,7 +822,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     if (iso_text2 != ""){
       free(iso_text2);
     }
-  }
+  /*}
   else {
     osd->channellist_selected_pos--;
     y -= 38;
@@ -820,7 +835,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     struct event_t* nextEvent = event_copy(osd->nextEvent, server);
 
     if (event){
-      /* Start/stop time - current event */
+      // Start/stop time - current event
       localtime_r((time_t*)&event->start, &start_time);
       localtime_r((time_t*)&event->stop, &stop_time);
     //if (event->title) {
@@ -840,8 +855,8 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
     iso_text = malloc(strlen(str) + 1);
     utf8decode(str, iso_text);        
     (void)graphics_resource_render_text_ext(osd->img, x, y, width, height,
-                                            COLOR_SELECTED_TEXT, /* fg */
-                                            COLOR_SELECTED_BACKGROUND,    /* bg */
+                                            COLOR_SELECTED_TEXT, // fg
+                                            COLOR_SELECTED_BACKGROUND,    // bg
                                             iso_text, strlen(iso_text), 30);  
     //graphics_update_displayed_resource(osd->img, x, y, width, 100);                                         
     free(iso_text);
@@ -849,6 +864,7 @@ void osd_channellist_update_channels(struct osd_t* osd, int direction)
       free(iso_text2);
     }
   }                                            
+  */
   osd_channellist_show_epg(osd, id);                                                                                      
   graphics_update_displayed_resource(osd->img, 0, 0, SCREENWIDTH,SCREENHEIGHT);                                        
 }
@@ -1082,8 +1098,8 @@ int osd_process_key(struct osd_t* osd, int c) {
           osd_channellist_display(osd,0);
         }
         else {
-          osd->channellist_prev_selected_channel = osd->channellist_selected_channel;
-          osd->channellist_selected_channel = channels_getnext(osd->channellist_selected_channel);  
+          //osd->channellist_prev_selected_channel = osd->channellist_selected_channel;
+          //osd->channellist_selected_channel = channels_getnext(osd->channellist_selected_channel);  
           osd_channellist_update_channels(osd, CHANNELLIST_DOWN);
         }     
         break;
@@ -1101,8 +1117,8 @@ int osd_process_key(struct osd_t* osd, int c) {
           osd_channellist_display(osd,0);          
         }
         else {
-          osd->channellist_prev_selected_channel = osd->channellist_selected_channel;
-          osd->channellist_selected_channel = channels_getprev(osd->channellist_selected_channel);  
+          //osd->channellist_prev_selected_channel = osd->channellist_selected_channel;
+          //osd->channellist_selected_channel = channels_getprev(osd->channellist_selected_channel);  
           osd_channellist_update_channels(osd, CHANNELLIST_UP);        
         }      
         break;  
