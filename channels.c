@@ -103,14 +103,15 @@ void channels_update(int server, int lcn, int tvh_id, char* name, int type, uint
 
   if (p==NULL) {
     fprintf(stderr,"Channel %d not found for update, adding.\n",tvh_id);
-    channels_add(server,lcn,tvh_id,name,type,eventId,nextEventId,tag);
+    //channels_add(server,lcn,tvh_id,name,type,eventId,nextEventId,tag);
   } else {
-    if (lcn >= 0) p->lcn = lcn;
+    /*if (lcn >= 0) p->lcn = lcn;
     if (type) p->type = type;
     if (name) {
       free(p->name);
       p->name = name;
     }
+    */
     if (eventId) p->eventId[server] = eventId;
     if (nextEventId) p->nextEventId[server] = nextEventId;
     //if (tag) p->tag = tag;
