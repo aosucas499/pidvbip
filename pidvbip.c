@@ -117,7 +117,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       if (htsp_get_int(msg,"channelNumber",&channelNumber) > 0) { channelNumber = -1; }
       if (htsp_get_uint(msg,"eventId",&eventid) > 0) { eventid = 0; }
       if (htsp_get_uint(msg,"nextEventId",&nexteventid) > 0) { nexteventid = 0; }
-      if (htsp_get_string(msg,"channelName") > 0) { channelName = " "; }
+      channelName = htsp_get_string(msg,"channelName");
 
       if (htsp_get_list(msg,"tags",&list,&listlen) == 0)
       {
