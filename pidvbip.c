@@ -167,7 +167,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
         channels_add(msg->server, channelNumber,channelId,channelName,channelType,eventid,nexteventid,tag);
         fprintf(stderr,"channelAdd - id=%d,lcn=%d,name=%s,current_event=%d,next_event=%d,tag=%d\n",channelId,channelNumber,channelName,eventid,nexteventid,tag);
       } else {
-        channels_update(msg->server, channelNumber,channelId,channelName,channelType,eventid,nexteventid,tag);
+        //channels_update(msg->server, channelNumber,channelId,channelName,channelType,eventid,nexteventid,tag);
         fprintf(stderr,"channelUpdate - id=%d,name=%s,current_event=%d,next_event=%d,tag=%d\n",channelId,channelName,eventid,nexteventid,tag);
       }
     }
