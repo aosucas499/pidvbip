@@ -951,7 +951,7 @@ void osd_channellist_display_channels(struct osd_t* osd, int lor )
       id = channels_getnext(id);   
     }
     }
-    //osd_channellist_show_epg(osd, osd->channellist_selected_channel);
+    osd_channellist_show_epg(osd, osd->channellist_selected_channel);
   }
   //fprintf(stderr, "\n"); 
 }
