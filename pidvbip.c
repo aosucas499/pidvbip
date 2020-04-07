@@ -163,10 +163,10 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
               channelType = CTYPE_UNKNOWN;
             }
             free(typestr);
-	  } else {
-	    channelType = CTYPE_UNKNOWN;
 	  }
-        }
+	} else {
+	  channelType = CTYPE_UNKNOWN;
+        } 
       }
 
       if (strcmp(method,"channelAdd")==0) {
