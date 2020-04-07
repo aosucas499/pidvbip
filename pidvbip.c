@@ -123,7 +123,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
       {
 	if (listlen > 0){
 	 unsigned char* buf = list;
-	 if (strlen(buf) >= 6){
+	 if (sizeof(buf) >= 6){
 	   tag = buf[6];
 	 }
 	}
@@ -134,7 +134,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
         channelType = CTYPE_NONE;
       } else {
         unsigned char* buf = list;
-	if (strlen(buf) >= 5){
+	if (sizeof(buf) >= 5){
           int type = buf[0]; if (type > 6) { type = 0; }
           int namelength = buf[1];
           int datalength = (buf[2] << 24) | (buf[3] << 16) | (buf[4] << 8) | buf[5];
