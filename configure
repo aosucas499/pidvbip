@@ -15,7 +15,7 @@
 
 ROOTDIR=$(cd "$(dirname "$0")"; pwd)
 CC=${CC:-gcc}
-CFLAGS="$CFLAGS -pipe -Wall -I."
+CFLAGS="$CFLAGS -g -pipe -Wall -I."
 LDFLAGS="-lm -lpthread"
 VC_SDK_PATH="${VC_SDK_PATH-/opt/vc}"
 
