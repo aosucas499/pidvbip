@@ -11,7 +11,7 @@ BUILDDIR	?= $(ROOTDIR)/build.linux
 # Compiler
 #
 
-CFLAGS += -I$(BUILDDIR)
+CFLAGS += -g -I$(BUILDDIR)
 
 vpath %.c $(ROOTDIR)
 vpath %.h $(ROOTDIR)
