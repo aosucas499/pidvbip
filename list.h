@@ -120,6 +120,7 @@ static inline void list_add_tail(struct list_head *new, struct list_head *head)
 static inline void __list_del(struct list_head * prev, struct list_head * next)
 {
 	if (prev && next){
+	  fprintf(stderr,"list_del ok!\n");
 	  next->prev = prev;
 	  prev->next = next;
 	}
