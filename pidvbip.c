@@ -99,7 +99,7 @@ static void process_message(char* method,struct htsp_message_t* msg,char* debugt
   } else if (strcmp(method,"eventDelete")==0) {
     uint32_t eventId;
     if (htsp_get_uint(msg,"eventId",&eventId)==0) {
-      //fprintf(stderr,"eventDelete: %d\n",eventId);
+      fprintf(stderr,"eventDelete: %d\n",eventId);
       event_delete(eventId, msg->server);
     } else {
       fprintf(stderr,"Warning eventDelete event not found (%d)\n",eventId);
