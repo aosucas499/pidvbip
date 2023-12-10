@@ -1,6 +1,6 @@
 [Unit]
 Description=Load pidvbip tvheadend at boot 
-After=network-online.target
+After=getty.target
 
 [Service]
 Type=simple
