@@ -8,5 +8,5 @@ Environment="DISPLAY=:0"
 ExecStartPre=ir-keytable -w /home/pi/pidvbip/remotes/mce_rc6_dre
 ExecStart=sh -c "cd /home/pi/pidvbip/ && ./pidvbip -h 'server ip' -U ' -P 'password' -i 'initial channel' "
 
-Install]
+[Install]
 WantedBy=multi-user.target
