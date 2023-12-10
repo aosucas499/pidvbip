@@ -19,7 +19,7 @@ sudo rm /etc/apt/sources.list.d/raspi.list
 
 echo -e "${ROJO}Installing necessary packages for pidvbip - Instalando paquetes necesarios para pidvbip${NORMAL}"
 sudo apt-get update -y
-sudo apt-get install -y git libmpg123-dev libfaad-dev liba52-dev libavahi-client-dev libfreetype6-dev libavformat-dev 
+sudo apt-get install -y git libmpg123-dev libfaad-dev liba52-dev libavahi-client-dev libfreetype6-dev libavformat-dev ir-keytable
 
 # Descarga pidvbip
 
