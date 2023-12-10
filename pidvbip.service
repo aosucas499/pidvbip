@@ -1,0 +1,12 @@
+[Unit]
+Description=Load pidvbip tvheadend at boot 
+After=network-online.target
+
+[Service]
+Type=simple
+Environment="DISPLAY=:0"
+ExecStartPre=ir-keytable -w /home/pi/pidvbip/remotes/mce_rc6_dre
+ExecStart=sh -c "cd /home/pi/pidvbip/ && ./pidvbip -h 'server ip' -U ' -P 'password' -i 'initial channel' "
+
+Install]
+WantedBy=multi-user.target
