@@ -82,13 +82,15 @@ static int get_input_key(int fd)
           case KEY_NUMERIC_9:
             return '9';
           case KEY_H:
+          case KEY_TV:
             return 'h';
           case KEY_I:
           case KEY_INFO:
           case KEY_LEFTMETA:
+          case KEY_EPG:
             return 'i';
           case KEY_Q:
-          case KEY_RED:
+          case KEY_STOP:
             return 'q';
           case KEY_N:
           case KEY_PAGEUP:
@@ -110,8 +112,26 @@ static int get_input_key(int fd)
           case KEY_STOPCD:
           case KEY_TAPE:
             return 'o';
+          case KEY_C:
+          case KEY_OK:
+            return 'c';
+          case KEY_BACK:
+          case KEY_EXIT:
+            return 'y';
+          case KEY_A:
+          case KEY_BLUE:
+            return 'a';
+          case KEY_Z:
+          case KEY_DVD:
+            return 'z';
+          case KEY_S:
+          case KEY_RECORD:
+            return 's';
           case KEY_SCREEN:
           case BTN_TRIGGER_HAPPY16:
+          case KEY_PLAY:
+          case KEY_PAUSE:
+          case KEY_PLAYPAUSE:
             return ' ';
    
           default: break;
