@@ -1,52 +1,63 @@
-pidvbip
-=======
+# pidvbip
 
-DVB-over-IP set-top box software for the Raspberry Pi.
+DVB-over-IP set-top box software for the Raspberry Pi 1b, 2, and 3.
 
-It requires Tvheadend running on a server (or on same pi)
+It requires:
+
++ Tvheadend running on a server (or on same pi)
++ MPEG-2 Hardware decoding 
 
 https://github.com/tvheadend/
-
-GPU memory should be a minimum of 128MB in config.txt
-
-    gpu_mem=128
-
-Screenshots
------------
 
 ![](http://i.imgur.com/REHGLaBm.jpg "Info display")
 
 ![](http://i.imgur.com/Upa7Jahm.jpg "Channel Display")
 
-Building
---------
+## Operating system
 
-pidvbip requires the following dependencies:
+This specific repository was modified to work in Raspbian / Raspberry Pi OS - Buster and Raspberry Pi 1b. (It will work in PI 2 and 3)
 
-libmpg123-dev libfaad-dev liba52-dev libavahi-client-dev libfreetype6-dev libavformat-dev
+Use this link to download and put in your Pi SD card: 
 
-After installing the above libraries, you can build pidvbip by typing
-"./configure && make" in the source code directory.
+[LINK](https://downloads.raspberrypi.com/raspios_lite_armhf/images/raspios_lite_armhf-2021-05-28/2021-05-07-raspios-buster-armhf-lite.zip)
 
+## Memory
 
-MPEG-2 decoding
----------------
+GPU memory should be a minimum of 128MB in config.txt
+
+    gpu_mem=128
+    
+## MPEG-2 decoding
 
 pidvbip requires that the MPEG-2 hardware codec is enabled (by
-purchase of the license).  Early versions of pidvbip have a software
-MPEG-2 decoder but this was removed in February 2013 to simplify
-maintenance and development of the main hardware playback code.
+purchase of the license). 
 
-The CPU-decoding version is still available at https://github.com/mikerr/pidvbip-cpu
-which doesn't require the hardware codec, but does need a faster
-pi model ( pi 2 or 3)
+To activate (forgotten) mpeg2 and VC codec licenses on raspberry pi follow this:
 
-Usage
------
+[LINK](https://github.com/suuhm/raspi_mpeg_license_patch.sh)
+
+## Install 
+
+Use the following code to download and execute the install script, in a terminal type:
+```
+wget https://raw.githubusercontent.com/aosucas499/pidvbip/master/install.sh -qO- | bash -s chmod +x install.sh && ./install.sh
+
+```
+
+Modify the service to load at boot with your Tvheadend 'server ip', 'user', 'password' and 'initial channel'.
+
+```
+sudo nano /etc/systemd/system/pidvbip.service
+
+```
+
+## Usage
+
+The install script do everything you need to load pidvbip in each boot, but this is the way to use this program.
 
 There are three ways for pidvbip to locate the tvheadend server:
 
-1) Via the command line - e.g. ./pidvbip mypc 9982
+1) Via the command line - e.g. ./pidvbip -h <tvheadend ip> -p 'tvh port' -U 'tvh user' -P 'tvh password'
 
 2) Via the config file pidvbip.conf.  See pidvbip.conf.example for 
    the list of possibe configuration values.
@@ -66,7 +77,13 @@ You can optionally specify a channel number as a third parameter to
 skip directly to that channel (only when also specifying the host and
 port on the command-line).
 
-Once running, the following keys are mapped to actions:
+### Remote
+
+![](https://www.mythtv.org/w/images/thumb/c/c1/MCE-Remote-2.jpg/110px-MCE-Remote-2.jpg)
+
+This repo contain and load code to use Microsoft MCE RC 6 remote, you can find ways to load other remotes finding tutorials about using ir-keytable.
+
+Once running, the following keys (and remote buttons) are mapped to actions: 
 
     'q' - quit
     '0' to '9' - direct channel number entry
